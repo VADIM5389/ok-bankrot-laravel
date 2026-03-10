@@ -61,11 +61,6 @@
         </div>
     </div>
 
-    <div class="compact-cta">
-        <h3>Готовы избавиться от долгов?</h3>
-        <p>Оставьте заявку и получите бесплатную консультацию</p>
-        <a href="#ex1"><button class="cta-btn">Получить консультацию</button></a>
-    </div>
 </div>
 
 <style>
