@@ -4,9 +4,9 @@
 <div class="calculator-page">
     <div class="calculator-container">
         <h1 class="calculator-title">Калькулятор оценки финансового положения</h1>
+
         <p class="calculator-subtitle">
-            Заполните данные ниже, чтобы получить предварительную оценку финансовой ситуации
-            и возможные рекомендации.
+            Заполните данные ниже, чтобы получить предварительную оценку вашей финансовой ситуации.
         </p>
 
         <div class="calculator-card">
@@ -15,23 +15,15 @@
 
                 <div class="calculator-grid">
                     <div class="calculator-field">
-                        <label for="incomePerMonth">Ежемесячный доход, ₽</label>
-                        <input
-                            type="number"
-                            name="incomePerMonth"
-                            id="incomePerMonth"
-                            min="0"
-                            step="0.01"
-                            value="{{ old('incomePerMonth', $input['incomePerMonth'] ?? '') }}"
-                            required
-                        >
-                        @error('incomePerMonth')
-                            <span class="field-error">{{ $message }}</span>
-                        @enderror
-                    </div>
-
-                    <div class="calculator-field">
-                        <label for="totalDebt">Общая сумма долга, ₽</label>
+                        <label for="totalDebt">
+                            Общая сумма задолженности, ₽
+                            <span class="tooltip-icon">
+                                ?
+                                <span class="tooltip-text">
+                                    Укажите общую сумму всех ваших долгов: кредиты, микрозаймы, задолженности по распискам, налогам, штрафам и иным финансовым обязательствам.
+                                </span>
+                            </span>
+                        </label>
                         <input
                             type="number"
                             name="totalDebt"
@@ -47,35 +39,100 @@
                     </div>
 
                     <div class="calculator-field">
-                        <label for="totalAssets">Стоимость имущества, ₽</label>
+                        <label for="incomePerMonth">
+                            Ваш средний ежемесячный доход, ₽
+                            <span class="tooltip-icon">
+                                ?
+                                <span class="tooltip-text">
+                                    Укажите средний доход, который вы получаете ежемесячно. Это может быть заработная плата, пенсия, доход от предпринимательства, аренды или иные регулярные поступления.
+                                </span>
+                            </span>
+                        </label>
                         <input
                             type="number"
-                            name="totalAssets"
-                            id="totalAssets"
+                            name="incomePerMonth"
+                            id="incomePerMonth"
                             min="0"
                             step="0.01"
-                            value="{{ old('totalAssets', $input['totalAssets'] ?? '') }}"
+                            value="{{ old('incomePerMonth', $input['incomePerMonth'] ?? '') }}"
                             required
                         >
-                        @error('totalAssets')
+                        @error('incomePerMonth')
                             <span class="field-error">{{ $message }}</span>
                         @enderror
                     </div>
 
                     <div class="calculator-field">
-                        <label for="monthlyObligations">Ежемесячные обязательства, ₽</label>
+                        <label for="monthlyExpenses">
+                            Обязательные ежемесячные расходы, ₽
+                            <span class="tooltip-icon">
+                                ?
+                                <span class="tooltip-text">
+                                    Укажите ваши регулярные расходы, необходимые для жизни: оплата коммунальных услуг, питание, транспорт, лекарства, расходы на детей и другие обязательные платежи.
+                                </span>
+                            </span>
+                        </label>
                         <input
                             type="number"
-                            name="monthlyObligations"
-                            id="monthlyObligations"
+                            name="monthlyExpenses"
+                            id="monthlyExpenses"
                             min="0"
                             step="0.01"
-                            value="{{ old('monthlyObligations', $input['monthlyObligations'] ?? '') }}"
+                            value="{{ old('monthlyExpenses', $input['monthlyExpenses'] ?? '') }}"
                             required
                         >
-                        @error('monthlyObligations')
+                        @error('monthlyExpenses')
                             <span class="field-error">{{ $message }}</span>
                         @enderror
+                    </div>
+
+                    <div class="calculator-field">
+                        <label for="monthlyDebtPayment">
+                            Ежемесячный платёж по кредитам и займам, ₽
+                            <span class="tooltip-icon">
+                                ?
+                                <span class="tooltip-text">
+                                    Укажите сумму, которую вы ежемесячно выплачиваете по кредитам, займам и другим долговым обязательствам.
+                                </span>
+                            </span>
+                        </label>
+                        <input
+                            type="number"
+                            name="monthlyDebtPayment"
+                            id="monthlyDebtPayment"
+                            min="0"
+                            step="0.01"
+                            value="{{ old('monthlyDebtPayment', $input['monthlyDebtPayment'] ?? '') }}"
+                            required
+                        >
+                        @error('monthlyDebtPayment')
+                            <span class="field-error">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div class="calculator-field calculator-field--full">
+                        <label for="realizableAssets">
+                            Стоимость имущества, которое можно реализовать, ₽
+                            <span class="tooltip-icon">
+                                ?
+                                <span class="tooltip-text">
+                                    Укажите примерную стоимость имущества, которое не относится к предметам первой необходимости и потенциально может учитываться при погашении долгов. Например: автомобиль, дополнительная недвижимость, дорогостоящая техника или иное ценное имущество.
+                                </span>
+                            </span>
+                        </label>
+                        <input
+                            type="number"
+                            name="realizableAssets"
+                            id="realizableAssets"
+                            min="0"
+                            step="0.01"
+                            value="{{ old('realizableAssets', $input['realizableAssets'] ?? '') }}"
+                            required
+                        >
+                        @error('realizableAssets')
+                            <span class="field-error">{{ $message }}</span>
+                        @enderror
+
                     </div>
                 </div>
 
@@ -87,21 +144,6 @@
             <div class="calculator-result calculator-result--{{ $result['type'] }}">
                 <h2>{{ $result['title'] }}</h2>
                 <p class="calculator-result__text">{{ $result['description'] }}</p>
-
-                <div class="calculator-result__stats">
-                    <div class="stat-box">
-                        <span>Коэффициент долговой нагрузки</span>
-                        <strong>{{ $result['debtToIncomeRatio'] }}</strong>
-                    </div>
-                    <div class="stat-box">
-                        <span>Соотношение имущества к долгу</span>
-                        <strong>{{ $result['assetToDebtRatio'] }}</strong>
-                    </div>
-                    <div class="stat-box">
-                        <span>Доля обязательств от дохода</span>
-                        <strong>{{ $result['obligationsToIncomeRatio'] }}</strong>
-                    </div>
-                </div>
             </div>
         @endif
 

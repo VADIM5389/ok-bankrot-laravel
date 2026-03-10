@@ -14,44 +14,43 @@ class CalculatorController extends Controller
     public function calculate(Request $request)
     {
         $validated = $request->validate([
-            'incomePerMonth' => 'required|numeric|min:0',
             'totalDebt' => 'required|numeric|min:0',
-            'totalAssets' => 'required|numeric|min:0',
-            'monthlyObligations' => 'required|numeric|min:0',
+            'incomePerMonth' => 'required|numeric|min:0',
+            'monthlyExpenses' => 'required|numeric|min:0',
+            'monthlyDebtPayment' => 'required|numeric|min:0',
+            'realizableAssets' => 'required|numeric|min:0',
         ]);
 
-        $incomePerMonth = (float) $validated['incomePerMonth'];
         $totalDebt = (float) $validated['totalDebt'];
-        $totalAssets = (float) $validated['totalAssets'];
-        $monthlyObligations = (float) $validated['monthlyObligations'];
+        $incomePerMonth = (float) $validated['incomePerMonth'];
+        $monthlyExpenses = (float) $validated['monthlyExpenses'];
+        $monthlyDebtPayment = (float) $validated['monthlyDebtPayment'];
+        $realizableAssets = (float) $validated['realizableAssets'];
 
+        $freeMoney = $incomePerMonth - $monthlyExpenses - $monthlyDebtPayment;
         $debtToIncomeRatio = $incomePerMonth > 0 ? $totalDebt / ($incomePerMonth * 12) : 0;
-        $assetToDebtRatio = $totalDebt > 0 ? $totalAssets / $totalDebt : 0;
-        $obligationsToIncomeRatio = $incomePerMonth > 0 ? $monthlyObligations / $incomePerMonth : 0;
+        $assetToDebtRatio = $totalDebt > 0 ? $realizableAssets / $totalDebt : 0;
+        $paymentLoad = $incomePerMonth > 0 ? $monthlyDebtPayment / $incomePerMonth : 0;
 
-        if ($debtToIncomeRatio > 5 && $assetToDebtRatio < 0.5) {
+        if (($freeMoney < 0 && $debtToIncomeRatio > 2) || ($debtToIncomeRatio > 5 && $assetToDebtRatio < 0.5)) {
             $result = [
                 'type' => 'danger',
                 'title' => 'Рекомендуется рассмотреть процедуру банкротства',
-                'description' => 'По введённым данным наблюдается высокая долговая нагрузка и недостаточный объём имущества для покрытия обязательств. Такая ситуация может свидетельствовать о признаках устойчивой неплатёжеспособности.',
+                'description' => 'По введённым данным финансовая нагрузка является высокой, а имеющихся ресурсов может быть недостаточно для самостоятельного погашения задолженности. В такой ситуации целесообразно обратиться за консультацией для оценки возможности применения процедуры банкротства.',
             ];
-        } elseif ($debtToIncomeRatio > 2 || $obligationsToIncomeRatio > 0.5) {
+        } elseif ($paymentLoad > 0.5 || $debtToIncomeRatio > 2 || $freeMoney < 0) {
             $result = [
                 'type' => 'warning',
-                'title' => 'Рекомендуется рассмотреть реструктуризацию задолженности',
-                'description' => 'Финансовая нагрузка является существенной. В данной ситуации целесообразно дополнительно оценить возможность реструктуризации долга и иных способов урегулирования обязательств.',
+                'title' => 'Рекомендуется дополнительно оценить варианты урегулирования задолженности',
+                'description' => 'По предварительному расчёту финансовая ситуация является напряжённой. В зависимости от структуры задолженности и иных обстоятельств может быть целесообразно рассмотреть реструктуризацию долга или иные законные способы урегулирования обязательств.',
             ];
         } else {
             $result = [
                 'type' => 'success',
                 'title' => 'Критических признаков неплатёжеспособности не выявлено',
-                'description' => 'По указанным данным текущая финансовая ситуация не демонстрирует явных признаков необходимости немедленного запуска процедуры банкротства. Однако рекомендуется учитывать и иные обстоятельства.',
+                'description' => 'По указанным данным явных признаков критической неплатёжеспособности не выявлено. Вместе с тем окончательная оценка ситуации требует учёта всех обстоятельств, включая характер задолженности, состав имущества и наличие иных обязательств.',
             ];
         }
-
-        $result['debtToIncomeRatio'] = number_format($debtToIncomeRatio, 2, '.', ' ');
-        $result['assetToDebtRatio'] = number_format($assetToDebtRatio, 2, '.', ' ');
-        $result['obligationsToIncomeRatio'] = number_format($obligationsToIncomeRatio, 2, '.', ' ');
 
         return view('calculator', [
             'result' => $result,
