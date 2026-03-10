@@ -10,6 +10,10 @@
     <!-- Remember to include jQuery :) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 
+    {{-- Маски --}}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/inputmask/dist/jquery.inputmask.min.js"></script>
+
     <!-- jQuery Modal -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
@@ -178,6 +182,40 @@
     });
 </script>
 
+
+{{-- маска цифр --}}
+<script>
+    $(document).ready(function () {
+        $('.phone').inputmask({
+            mask: '+7 (999) 999-99-99',
+            placeholder: '_',
+            clearMaskOnLostFocus: false
+        });
+
+        $('.money').inputmask('decimal', {
+            groupSeparator: ' ',
+            autoGroup: true,
+            digits: 0,
+            digitsOptional: false,
+            radixPoint: '.',
+            allowMinus: false,
+            rightAlign: false,
+            removeMaskOnSubmit: true,
+            placeholder: '',
+            clearMaskOnLostFocus: false
+        });
+
+        $('#burgerBtn').on('click', function () {
+            $('#navMenu').toggleClass('active');
+            $(this).toggleClass('active');
+        });
+
+        $('#navMenu a[rel="modal:open"]').on('click', function () {
+            $('#navMenu').removeClass('active');
+            $('#burgerBtn').removeClass('active');
+        });
+    });
+</script>
 
 </body>
 </html>

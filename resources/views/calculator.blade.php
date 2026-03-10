@@ -25,12 +25,13 @@
                             </span>
                         </label>
                         <input
-                            type="number"
-                            name="totalDebt"
+                            type="text"
+                            class="money"
                             id="totalDebt"
-                            min="0"
-                            step="0.01"
+                            name="totalDebt"
                             value="{{ old('totalDebt', $input['totalDebt'] ?? '') }}"
+                            placeholder="Например: 500000"
+                            autocomplete="off"
                             required
                         >
                         @error('totalDebt')
@@ -49,12 +50,13 @@
                             </span>
                         </label>
                         <input
-                            type="number"
-                            name="incomePerMonth"
+                            type="text"
+                            class="money"
                             id="incomePerMonth"
-                            min="0"
-                            step="0.01"
+                            name="incomePerMonth"
                             value="{{ old('incomePerMonth', $input['incomePerMonth'] ?? '') }}"
+                            placeholder="Например: 120000"
+                            autocomplete="off"
                             required
                         >
                         @error('incomePerMonth')
@@ -73,12 +75,13 @@
                             </span>
                         </label>
                         <input
-                            type="number"
-                            name="monthlyExpenses"
+                            type="text"
+                            class="money"
                             id="monthlyExpenses"
-                            min="0"
-                            step="0.01"
+                            name="monthlyExpenses"
                             value="{{ old('monthlyExpenses', $input['monthlyExpenses'] ?? '') }}"
+                            placeholder="Например: 40000"
+                            autocomplete="off"
                             required
                         >
                         @error('monthlyExpenses')
@@ -97,12 +100,13 @@
                             </span>
                         </label>
                         <input
-                            type="number"
-                            name="monthlyDebtPayment"
+                            type="text"
+                            class="money"
                             id="monthlyDebtPayment"
-                            min="0"
-                            step="0.01"
+                            name="monthlyDebtPayment"
                             value="{{ old('monthlyDebtPayment', $input['monthlyDebtPayment'] ?? '') }}"
+                            placeholder="Например: 25000"
+                            autocomplete="off"
                             required
                         >
                         @error('monthlyDebtPayment')
@@ -121,18 +125,18 @@
                             </span>
                         </label>
                         <input
-                            type="number"
-                            name="realizableAssets"
+                            type="text"
+                            class="money"
                             id="realizableAssets"
-                            min="0"
-                            step="0.01"
+                            name="realizableAssets"
                             value="{{ old('realizableAssets', $input['realizableAssets'] ?? '') }}"
+                            placeholder="Например: 300000"
+                            autocomplete="off"
                             required
                         >
                         @error('realizableAssets')
                             <span class="field-error">{{ $message }}</span>
                         @enderror
-
                     </div>
                 </div>
 
