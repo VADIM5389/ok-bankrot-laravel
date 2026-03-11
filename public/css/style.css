@@ -12,7 +12,6 @@ img {
   height: auto;
 }
 
-/* Шапка */
 .site-header {
   background-color: #f8f9fa;
 }
@@ -44,15 +43,15 @@ img {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 20px;
+  gap: 16px;
   position: relative;
 }
 
 .nav-menu {
   display: flex;
   align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
+  gap: 8px;
+  flex-wrap: nowrap;
 }
 
 .nav-menu a {
@@ -72,7 +71,9 @@ img {
 .header-actions {
   display: flex;
   align-items: center;
+  gap: 10px;
   margin-left: auto;
+  flex-shrink: 0;
 }
 
 .order_a_call {
@@ -131,64 +132,21 @@ img {
   transform: translateY(-9px) rotate(-45deg);
 }
 
-/* Планшеты */
 @media (max-width: 992px) {
   .header-inner {
     padding: 12px 16px;
   }
 
-  .nav-menu {
-    gap: 6px;
-  }
-
-  .nav-menu a {
-    padding: 8px 10px;
-    font-size: 15px;
-  }
-
-  .order_a_call {
-    padding: 10px 14px;
-    font-size: 14px;
-  }
-}
-
-/* Телефоны */
-@media (max-width: 768px) {
-  .header-top {
-    padding: 14px 12px 10px;
-  }
-
-  .site-logo {
-    width: 240px;
-  }
-
-  .header-inner {
-    padding: 10px 12px;
-    gap: 10px;
-  }
-
   .burger {
     display: flex;
-    order: 2;
-  }
-
-  .header-actions {
-    order: 1;
-    margin-left: auto;
-  }
-
-  .order_a_call {
-    padding: 9px 12px;
-    font-size: 13px;
-    border-radius: 18px;
   }
 
   .nav-menu {
     display: none;
     position: absolute;
     top: calc(100% + 8px);
-    left: 12px;
-    right: 12px;
+    left: 16px;
+    right: 16px;
     background: #ffffff;
     border-radius: 14px;
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.14);
@@ -210,87 +168,158 @@ img {
     border-radius: 10px;
   }
 }
+
+@media (max-width: 768px) {
+  .header-top {
+    padding: 14px 12px 10px;
+  }
+
+  .site-logo {
+    width: 240px;
+  }
+
+  .header-inner {
+    padding: 10px 12px;
+    gap: 10px;
+  }
+
+  .order_a_call {
+    padding: 9px 12px;
+    font-size: 13px;
+    border-radius: 18px;
+  }
+
+  .nav-menu {
+    left: 12px;
+    right: 12px;
+  }
+}
 /* конец красивой шапки */
 
 
-/* форма отправки в модальном окне */
+/* Модальные окна */
 
+.custom-modal {
+  max-width: 520px;
+  width: 90%;
+  padding: 32px 28px;
+  border-radius: 18px;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.18);
+  background: #ffffff;
+}
+
+.modal-title {
+  margin: 0 0 24px;
+  text-align: center;
+  font-size: 28px;
+  line-height: 1.25;
+  color: #222;
+  font-weight: 700;
+}
+
+.modal_form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.modal_form label {
+  font-size: 16px;
+  font-weight: 600;
+  color: #222;
+  margin-bottom: -6px;
+}
+
+.modal_form input[type="text"],
+.modal_form input[type="email"],
+.modal_form input[type="password"] {
+  width: 100%;
+  height: 48px;
+  border: 1px solid #d8d8d8;
+  border-radius: 12px;
+  padding: 0 14px;
+  font-size: 16px;
+  color: #222;
+  background-color: #fff;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  box-sizing: border-box;
+}
+
+.modal_form input[type="text"]:focus,
+.modal_form input[type="email"]:focus,
+.modal_form input[type="password"]:focus {
+  border-color: #fcc415;
+  box-shadow: 0 0 0 3px rgba(252, 196, 21, 0.2);
+}
+
+.modal_form input::placeholder {
+  color: #9a9a9a;
+}
+
+.modal-submit {
+  margin-top: 8px;
+  height: 50px !important;
+  border: none !important;
+  border-radius: 14px !important;
+  background-color: #d72f15 !important;
+  color: #fff !important;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.15s ease;
+}
+
+.modal-submit:hover {
+  background-color: #b52612 !important;
+}
+
+.modal-submit:active {
+  transform: scale(0.98);
+}
+
+/* затемнение */
 .blocker {
   z-index: 2000 !important;
+  background: rgba(0, 0, 0, 0.55) !important;
 }
 
 .modal {
   z-index: 2100 !important;
 }
 
-.Title{
-  text-align: center;
-}
-.modal_form label{
-    font-size: 20px;
-    margin-top: 20px;
-}
-
-.modal_form input{
-    display: block;
-    width: 100%;
-    border: 1px solid #bdbdbd;
-    border-radius: 0.25rem;
-    margin-bottom: 15px;
-    line-height: 2.0;
+/* крестик jquery modal */
+.modal a.close-modal {
+  top: 10px !important;
+  right: 10px !important;
+  transform: scale(1.1);
 }
 
-.button_submit{
-    margin-top: 20px;
-    
+/* мобильная версия */
+@media (max-width: 768px) {
+  .custom-modal {
+    width: 92%;
+    padding: 24px 18px;
+    border-radius: 16px;
+  }
+
+  .modal-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  .modal_form input[type="text"],
+  .modal_form input[type="email"],
+  .modal_form input[type="password"] {
+    height: 46px;
+    font-size: 15px;
+  }
+
+  .modal-submit {
+    height: 48px !important;
+    font-size: 15px;
+  }
 }
-.button_submit:hover{
-    background-color: #d72f15;
-    color: white;
-}
-
-.button_submit:active{
-    background-color: #d72f15;    /* Even darker red on click */
-    transform: scale(0.97);       /* Slight press effect */
-}
-/* конец формы отправки в модальном окне */
-
-/* Регистрация в модальном окне */
-.registration_button{
-    margin-top: 20px;
-    
-}
-
-.registration_button:hover{
-    background-color: #d72f15;
-    color: white;
-}
-
-.registration_button:active{
-    background-color: #d72f15;    /* Even darker red on click */
-    transform: scale(0.97);       /* Slight press effect */
-}
-/* Конец регестрации в модальном окне */
-
-
-/* Авторизация в модальном окне */
-
-.authorization_button{
-    margin-top: 20px;
-    
-}
-
-.authorization_button:hover{
-    background-color: #d72f15;
-    color: white;
-}
-
-.authorization_button:active{
-    background-color: #d72f15;    /* Even darker red on click */
-    transform: scale(0.97);       /* Slight press effect */
-}
-
-/* Конец авторизации в модальном окне */
 
 /* Главная страница */
 
