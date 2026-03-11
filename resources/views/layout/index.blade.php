@@ -72,14 +72,27 @@
         <div id="ex1" class="modal custom-modal">
             <h2 class="modal-title">Оставить заявку на консультацию</h2>
 
-            <form action="" method="" class="modal_form">
+            <form action="{{ route('callback-request.store') }}" method="POST" class="modal_form">
                 @csrf
 
                 <label>ФИО</label>
-                <input type="text" name="full_name" placeholder="Иванов Иван Иванович" required>
+                <input
+                    type="text"
+                    name="full_name"
+                    placeholder="Иванов Иван Иванович"
+                    value="{{ old('full_name') }}"
+                    required
+                >
 
                 <label>Телефон</label>
-                <input type="text" class="phone" name="phone" placeholder="+7 (___) ___-__-__" required>
+                <input
+                    type="text"
+                    class="phone"
+                    name="phone"
+                    placeholder="+7 (___) ___-__-__"
+                    value="{{ old('phone') }}"
+                    required
+                >
 
                 <input type="submit" value="Отправить" class="modal-submit">
             </form>

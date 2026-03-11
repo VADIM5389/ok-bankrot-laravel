@@ -5,7 +5,7 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CalculatorController;
-
+use App\Http\Controllers\CallbackRequestController;
 
 
 
@@ -45,14 +45,10 @@ Route::get('/dashboard',[AccountController::class, 'showAccount'])->name('showAc
 
 Route::get('/dashboard/admin',[AdminController::class, 'showAdmin'])->name('showAdmin');
 
-// Route::get('/about', function () {
-//     return view('about'); // возвращает шаблон resources/views/about.blade.php
-// })->name('about');
 
-// Route::get('/about', function () {
-//     return view('about'); // возвращает шаблон resources/views/about.blade.php
-// })->name('about');
+Route::post('/callback-request', [CallbackRequestController::class, 'store'])->name('callback-request.store');
 
-// Route::get('/about', function () {
-//     return view('about'); // возвращает шаблон resources/views/about.blade.php
-// })->name('about');
+
+
+
+
