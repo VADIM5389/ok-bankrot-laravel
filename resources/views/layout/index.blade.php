@@ -162,7 +162,8 @@
                 clearMaskOnLostFocus: false
             });
 
-            $('.money').inputmask('decimal', {
+            $('.money').inputmask({
+                alias: 'numeric',
                 groupSeparator: ' ',
                 autoGroup: true,
                 digits: 0,
@@ -172,7 +173,8 @@
                 rightAlign: false,
                 removeMaskOnSubmit: true,
                 placeholder: '',
-                clearMaskOnLostFocus: false
+                showMaskOnHover: false,
+                showMaskOnFocus: false
             });
 
             $('#burgerBtn').on('click', function () {
