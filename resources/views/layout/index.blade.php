@@ -26,7 +26,7 @@
                 <nav class="nav-menu" id="navMenu">
                     <a href="{{ route('main') }}">Главная</a>
                     <a href="{{ route('about') }}">О компании</a>
-                    <a href="{{ route('Contacts') }}">Контакты</a>
+                    <a href="{{ route('contacts') }}">Контакты</a>
                     <a href="{{ route('faq') }}">FAQ</a>
 
                     @guest

@@ -8,8 +8,6 @@ use App\Http\Controllers\CalculatorController;
 use App\Http\Controllers\CallbackRequestController;
 
 
-
-
 Route::get('/', function () {
     return view('welcome');
 })->name('main');
@@ -18,9 +16,9 @@ Route::get('/about', function () {
     return view('about'); // возвращает шаблон resources/views/about.blade.php
 })->name('about');
 
-Route::get('/Contacts', function () {
-    return view('Contacts'); // возвращает шаблон resources/views/contacts.blade.php
-})->name('Contacts');
+Route::get('/contacts', function () {
+    return view('contacts'); // возвращает шаблон resources/views/contacts.blade.php
+})->name('contacts');
 
 Route::get('/faq', function () {
     return view('faq'); // возвращает шаблон resources/views/faq.blade.php
