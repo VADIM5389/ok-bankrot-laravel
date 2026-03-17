@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="icon" href="https://avatars.mds.yandex.net/i?id=c93efa4ee54a2f270564355a35d3daf1_l-9181971-images-thumbs&n=13" type="image/x-icon">
+    <link rel="shortcut icon" href="https://avatars.mds.yandex.net/i?id=c93efa4ee54a2f270564355a35d3daf1_l-9181971-images-thumbs&n=13" type="image/x-icon">
+
     <title>ОК-банкрот|Главная</title>
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
