@@ -25,6 +25,10 @@ class CallbackRequestController extends Controller
         try {
             $webhookUrl = rtrim(config('services.bitrix.webhook_url'), '/');
 
+            if (empty($webhookUrl)) {
+                throw new \Exception('BITRIX_WEBHOOK_URL не настроен');
+            }
+
             $response = Http::asForm()->post($webhookUrl . '/crm.lead.add.json', [
                 'fields' => [
                     'TITLE' => 'Заявка на обратный звонок с сайта',
