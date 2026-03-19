@@ -40,22 +40,29 @@ class AuthController extends Controller
         return view('login');
     }
 
-    public function login(Request $request) {
-        $user = User::where('email', $request->email)->first();
+    public function login(Request $request)
+    {
+        $validated = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required', 'string'],
+        ], [
+            'email.required' => 'Введите email.',
+            'email.email' => 'Введите корректный email.',
+            'password.required' => 'Введите пароль.',
+        ]);
 
-        if ($user && Hash::check($request->password, $user->password)) {
-            // ИСПРАВЛЕНО: используем Auth::login() вместо Auth::email()
-            Auth::login($user);
-
-            if ($user->role == 'user') {
-                return redirect()->route('showAccount')->with('success','Добро пожаловать в личный кабинет пользователя');
-            } else {
-                return redirect()->route('showAdmin')->with('success','Добро пожаловать в админ панель');
-            }
+        if (!auth()->attempt([
+            'email' => $validated['email'],
+            'password' => $validated['password'],
+        ])) {
+            return back()
+                ->withInput($request->only('email'))
+                ->with('error', 'Аккаунт не найден или указан неверный пароль.');
         }
-        
-        // ИСПРАВЛЕНО: заменил 'email' на правильный маршрут для формы входа
-        return redirect()->route('showLogin')->with('error','Неверный логин или пароль!');
+
+        $request->session()->regenerate();
+
+        return redirect()->route('account');
     }
 
    

@@ -165,6 +165,14 @@
                 @endforeach
             </div>
         @endif
+
+        @if ($errors->any())
+            <div class="message-error">
+                @foreach ($errors->all() as $error)
+                    <div>{{ $error }}</div>
+                @endforeach
+            </div>
+        @endif
     </main>
 
     <footer>
