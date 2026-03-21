@@ -7,69 +7,74 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
-public function store(Request $request)
+class CallbackRequestController extends Controller
 {
-    $validated = $request->validate([
-        'full_name' => ['required', 'string', 'max:255'],
-        'phone' => ['required', 'string', 'max:25'],
-    ]);
-
-    $callbackRequest = CallbackRequest::create([
-        'full_name' => $validated['full_name'],
-        'phone' => $validated['phone'],
-        'status' => 'new',
-    ]);
-
-    try {
-        $webhookUrl = rtrim((string) config('services.bitrix.webhook_url'), '/');
-
-        if (empty($webhookUrl)) {
-            throw new \Exception('BITRIX_WEBHOOK_URL не настроен');
-        }
-
-        $url = $webhookUrl . '/crm.lead.add.json';
-
-        $response = Http::asForm()->post($url, [
-            'fields[TITLE]' => 'Заявка на обратный звонок с сайта',
-            'fields[NAME]' => $validated['full_name'],
-            'fields[PHONE][0][VALUE]' => $validated['phone'],
-            'fields[PHONE][0][VALUE_TYPE]' => 'WORK',
-            'fields[COMMENTS]' => 'Заявка оставлена через форму "Заказать звонок" на сайте OK-Банкрот.',
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'full_name' => ['required', 'string', 'max:255'],
+            'phone' => ['required', 'string', 'max:25'],
+        ], [
+            'full_name.required' => 'Введите ФИО.',
+            'phone.required' => 'Введите телефон.',
         ]);
 
-        Log::info('Bitrix debug', [
-            'url' => $url,
-            'status' => $response->status(),
-            'body' => $response->body(),
+        $callbackRequest = CallbackRequest::create([
+            'full_name' => $validated['full_name'],
+            'phone' => $validated['phone'],
+            'status' => 'new',
         ]);
 
-        $responseData = $response->json();
+        try {
+            $webhookUrl = rtrim((string) config('services.bitrix.webhook_url'), '/');
 
-        if ($response->successful() && !isset($responseData['error'])) {
-            $callbackRequest->update([
-                'status' => 'sent',
+            if (empty($webhookUrl)) {
+                throw new \Exception('BITRIX_WEBHOOK_URL не настроен');
+            }
+
+            $url = $webhookUrl . '/crm.lead.add.json';
+
+            $response = Http::asForm()->post($url, [
+                'fields[TITLE]' => 'Заявка на обратный звонок с сайта',
+                'fields[NAME]' => $validated['full_name'],
+                'fields[PHONE][0][VALUE]' => $validated['phone'],
+                'fields[PHONE][0][VALUE_TYPE]' => 'WORK',
+                'fields[COMMENTS]' => 'Заявка оставлена через форму "Заказать звонок" на сайте OK-Банкрот.',
             ]);
-        } else {
+
+            Log::info('Bitrix debug', [
+                'url' => $url,
+                'status' => $response->status(),
+                'body' => $response->body(),
+            ]);
+
+            $responseData = $response->json();
+
+            if ($response->successful() && !isset($responseData['error'])) {
+                $callbackRequest->update([
+                    'status' => 'sent',
+                ]);
+            } else {
+                $callbackRequest->update([
+                    'status' => 'error',
+                ]);
+
+                Log::error('Bitrix send failed', [
+                    'status' => $response->status(),
+                    'body' => $response->body(),
+                    'json' => $responseData,
+                ]);
+            }
+        } catch (\Throwable $e) {
             $callbackRequest->update([
                 'status' => 'error',
             ]);
 
-            Log::error('Bitrix send failed', [
-                'status' => $response->status(),
-                'body' => $response->body(),
-                'json' => $responseData,
+            Log::error('Bitrix exception', [
+                'message' => $e->getMessage(),
             ]);
         }
 
-    } catch (\Throwable $e) {
-        $callbackRequest->update([
-            'status' => 'error',
-        ]);
-
-        Log::error('Bitrix exception', [
-            'message' => $e->getMessage(),
-        ]);
+        return back()->with('success', 'Заявка успешно отправлена. Мы свяжемся с вами в ближайшее время.');
     }
-
-    return back()->with('success', 'Заявка успешно отправлена. Мы свяжемся с вами в ближайшее время.');
 }
