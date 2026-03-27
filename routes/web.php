@@ -28,6 +28,10 @@ Route::get('/account', function () {
     return view('account'); // возвращает шаблон resources/views/account.blade.php
 })->name('account');
 
+Route::get('/services', function () {
+    return view('services');
+})->name('services');
+
 Route::get('/calculator', [CalculatorController::class, 'index'])->name('calculator'); //открыть страницу калькулятора
 Route::post('/calculator', [CalculatorController::class, 'calculate'])->name('calculator.calculate');
 

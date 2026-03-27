@@ -11,7 +11,7 @@
 
     <title>ОК-банкрот|Главная</title>
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/inputmask/dist/jquery.inputmask.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
@@ -32,6 +32,8 @@
                     <a href="{{ route('about') }}">О компании</a>
                     <a href="{{ route('contacts') }}">Контакты</a>
                     <a href="{{ route('faq') }}">FAQ</a>
+                    <a href="{{ route('services') }}">Услуги</a>
+                    <a href="{{ route('calculator') }}">Калькулятор</a>
 
                     @guest
                         <a href="#ex2" rel="modal:open" class="menu-modal-link">Авторизация</a>
@@ -40,7 +42,7 @@
 
                     @auth
                         @if (auth()->user()->role !== 'admin')
-                            <a href="{{ route('calculator') }}">Калькулятор банкротства</a>
+                            
                             <a href="{{ route('account') }}">Личный кабинет</a>
                             <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 Выход
