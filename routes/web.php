@@ -32,6 +32,10 @@ Route::get('/services', function () {
     return view('services');
 })->name('services');
 
+Route::middleware('auth')->group(function () {
+    Route::get('/account', [AccountController::class, 'showAccount'])->name('account');
+});
+
 Route::get('/calculator', [CalculatorController::class, 'index'])->name('calculator'); //открыть страницу калькулятора
 Route::post('/calculator', [CalculatorController::class, 'calculate'])->name('calculator.calculate');
 

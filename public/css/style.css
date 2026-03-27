@@ -1171,64 +1171,185 @@ iframe {
 /* Конец визуализации результата калькулятора */
 
 /* Конец калькулятора */
-
 /* Личный кабинет */
 
-.account-page{
-    padding:40px 15px;
-    background:#f7f7f7;
+.account-page {
+  background-color: #f8f9fa;
+  padding: 40px 15px 60px;
 }
 
-.account-container{
-    max-width:700px;
-    margin:auto;
+.account-container {
+  max-width: 900px;
+  margin: 0 auto;
 }
 
-.account-title{
-    text-align:center;
-    font-size:32px;
-    margin-bottom:30px;
+.account-title {
+  text-align: center;
+  font-size: 36px;
+  color: #222;
+  margin-bottom: 24px;
 }
 
-.account-card{
-    background:white;
-    border-radius:16px;
-    padding:30px;
-    box-shadow:0 8px 25px rgba(0,0,0,0.08);
+.account-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 28px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  margin-bottom: 24px;
 }
 
-.account-info{
-    display:flex;
-    flex-direction:column;
-    gap:18px;
+.account-card__title {
+  margin: 0 0 20px;
+  font-size: 26px;
+  color: #222;
 }
 
-.account-row{
-    display:flex;
-    justify-content:space-between;
-    border-bottom:1px solid #eee;
-    padding-bottom:10px;
+.account-info {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
-.account-label{
-    color:#666;
+.account-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #ececec;
 }
 
-.account-value{
-    font-weight:600;
-    color:#222;
+.account-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
 }
 
-/* адаптив */
-
-@media (max-width:600px){
-
-.account-row{
-    flex-direction:column;
-    gap:5px;
+.account-label {
+  color: #666;
+  font-size: 15px;
 }
 
+.account-value {
+  color: #222;
+  font-weight: 600;
+  text-align: right;
 }
+
+.account-empty {
+  background: #fff8e8;
+  border: 1px solid #f2ddb0;
+  border-radius: 14px;
+  padding: 16px 18px;
+  color: #555;
+  line-height: 1.6;
+}
+
+.account-requests {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.request-card {
+  border: 1px solid #ececec;
+  border-radius: 16px;
+  padding: 18px;
+  background: #fafafa;
+}
+
+.request-card__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.request-card__name {
+  font-size: 18px;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 4px;
+}
+
+.request-card__date {
+  font-size: 14px;
+  color: #777;
+}
+
+.request-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.request-card__row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: #555;
+}
+
+.request-card__row strong {
+  color: #222;
+}
+
+.request-status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.request-status--new {
+  background: #fff8e8;
+  color: #b56c00;
+}
+
+.request-status--sent {
+  background: #eefaf0;
+  color: #1f7a35;
+}
+
+.request-status--error {
+  background: #fff1ef;
+  color: #c0392b;
+}
+
+@media (max-width: 768px) {
+  .account-page {
+    padding: 25px 12px 40px;
+  }
+
+  .account-title {
+    font-size: 28px;
+  }
+
+  .account-card {
+    padding: 20px;
+    border-radius: 16px;
+  }
+
+  .account-card__title {
+    font-size: 22px;
+  }
+
+  .account-row,
+  .request-card__top,
+  .request-card__row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .account-value {
+    text-align: left;
+  }
+}
+
+/* Конец личного кабинета */
 
 
 

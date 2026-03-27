@@ -27,8 +27,6 @@ class CalculatorController extends Controller
         $monthlyDebtPayment = (float) $validated['monthlyDebtPayment'];
         $realizableAssets = (float) $validated['realizableAssets'];
 
-        // Правильный свободный остаток:
-        // доход - (обязательные расходы + текущий платёж)
         $freeMoney = $incomePerMonth - ($monthlyExpenses + $monthlyDebtPayment);
 
         // Для отображения в графике отрицательное значение не даём,
