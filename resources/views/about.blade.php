@@ -1,70 +1,80 @@
 @extends('layout.index')
+
 @section('main')
+<div class="about-page">
+    <div class="about-container">
+        <div class="about-hero">
+            <h1>Почему выбирают нас</h1>
+            <p>
+                Мы помогаем гражданам законно решать проблемы с долгами, сопровождая клиента
+                на каждом этапе и обеспечивая понятный, прозрачный и профессиональный подход.
+            </p>
+        </div>
 
-<div class="about-compact">
-    <div class="compact-hero">
-        <h1>О нашей компании</h1>
-        <p>Помогаем обрести финансовую свободу через банкротство физических лиц</p>
-    </div>
+        <div class="about-grid">
+            <div class="about-card">
+                <div class="about-card__icon">✔</div>
+                <h2>Опыт и практика</h2>
+                <p>
+                    Наша команда имеет практический опыт сопровождения процедур банкротства
+                    и работы с различными жизненными ситуациями клиентов.
+                </p>
+            </div>
 
-    <div class="compact-content">
-        <div class="main-info">
-            <h2>Что мы делаем</h2>
-            <p>Специализируемся на сопровождении процедуры банкротства физических лиц. Помогаем законно списать долги и начать жизнь с чистого листа.</p>
-            
-            <h2>Почему выбирают нас</h2>
-            <div class="advantages-compact">
-                <div class="advantage-item">
-                    <span class="advantage-icon">⚡</span>
-                    <div>
-                        <strong>Быстро</strong>
-                        <p>Процедура от 3 до 9 месяцев</p>
-                    </div>
-                </div>
-                <div class="advantage-item">
-                    <span class="advantage-icon">🛡️</span>
-                    <div>
-                        <strong>Надежно</strong>
-                        <p>Гарантия конфиденциальности</p>
-                    </div>
-                </div>
-                <div class="advantage-item">
-                    <span class="advantage-icon">💼</span>
-                    <div>
-                        <strong>Профессионально</strong>
-                        <p>Опытные юристы и финансовые управляющие</p>
-                    </div>
-                </div>
-                <div class="advantage-item">
-                    <span class="advantage-icon">💰</span>
-                    <div>
-                        <strong>Выгодно</strong>
-                        <p>Прозрачные цены, рассрочка платежа</p>
-                    </div>
-                </div>
+            <div class="about-card">
+                <div class="about-card__icon">✔</div>
+                <h2>Честный подход</h2>
+                <p>
+                    Мы не обещаем невозможного и не вводим клиентов в заблуждение.
+                    Каждая ситуация анализируется индивидуально с учётом всех обстоятельств.
+                </p>
+            </div>
+
+            <div class="about-card">
+                <div class="about-card__icon">✔</div>
+                <h2>Понятные условия</h2>
+                <p>
+                    Все этапы сотрудничества обсуждаются заранее. Клиент понимает,
+                    за что именно он платит и какие действия будут предприниматься.
+                </p>
+            </div>
+
+            <div class="about-card">
+                <div class="about-card__icon">✔</div>
+                <h2>Сопровождение на всех этапах</h2>
+                <p>
+                    От первичной консультации до завершения процедуры мы остаёмся на связи,
+                    помогаем с документами и разъясняем все возникающие вопросы.
+                </p>
+            </div>
+
+            <div class="about-card">
+                <div class="about-card__icon">✔</div>
+                <h2>Индивидуальный подход</h2>
+                <p>
+                    Мы понимаем, что каждая финансовая ситуация уникальна,
+                    поэтому подбираем решение с учётом конкретных обстоятельств клиента.
+                </p>
+            </div>
+
+            <div class="about-card">
+                <div class="about-card__icon">✔</div>
+                <h2>Ориентация на результат</h2>
+                <p>
+                    Наша цель — помочь клиенту пройти процедуру максимально спокойно,
+                    понятно и в рамках действующего законодательства.
+                </p>
             </div>
         </div>
 
-        <div class="stats-compact">
-            <div class="stat-card">
-                <div class="stat-number">500+</div>
-                <div class="stat-desc">успешных дел о банкротстве</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">95%</div>
-                <div class="stat-desc">положительных решений суда</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">7 лет</div>
-                <div class="stat-desc">опыта работы в банкротстве</div>
-            </div>
+        <div class="about-cta">
+            <h2>Остались вопросы?</h2>
+            <p>
+                Оставьте заявку на консультацию, и мы поможем оценить вашу ситуацию
+                и подобрать оптимальный вариант решения.
+            </p>
+            <a href="#ex1" rel="modal:open" class="about-cta__btn">Заказать звонок</a>
         </div>
     </div>
-
 </div>
-
-<style>
-
-</style>
-
 @endsection
