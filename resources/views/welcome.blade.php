@@ -147,6 +147,43 @@
             </div>
         </section>
     </div>
+
+    <div class="welcome-container">
+        <section class="steps-section">
+            <h2 class="steps-title">Этапы процедуры банкротства</h2>
+
+            <div class="steps-grid">
+
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3>Анализ ситуации</h3>
+                    <p>
+                        Оцениваем финансовое положение, долги и платежеспособность.
+                        Определяем, подходит ли процедура банкротства.
+                    </p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3>Подача заявления</h3>
+                    <p>
+                        Подготавливаем документы и подаём заявление в суд.
+                        Формируем полный пакет данных о доходах и долгах.
+                    </p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3>Запуск процедуры</h3>
+                    <p>
+                        Суд вводит процедуру банкротства и назначает управляющего,
+                        который сопровождает процесс.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+    </div>
 </div>
 
 <script>
