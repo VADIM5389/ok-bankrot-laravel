@@ -60,6 +60,124 @@
                 </p>
             </div>
         </div>
+
+        <section class="reviews-section">
+            <h2 class="reviews-title">Отзывы клиентов</h2>
+
+            <div class="swiper reviewsSwiper">
+                <div class="swiper-wrapper">
+
+                    <div class="swiper-slide">
+                        <div class="review-card">
+                            <h3>Жанна Александрова</h3>
+                            <div class="stars">★★★★★</div>
+                            <p>Очень надежные и порядочные профессионалы своего дела!</p>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="review-card">
+                            <h3>Константин Бражнов</h3>
+                            <div class="stars">★★★★★</div>
+                            <p>Благодарю "ОК Банкрот" за помощь. Профессионалы своего дела. Всё просто и прозрачно, без скрытых расходов. Даже после завершения процедуры остаются на связи и помогают.</p>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="review-card">
+                            <h3>Александр Пузырев</h3>
+                            <div class="stars">★★★★★</div>
+                            <p>Ольга Валерьевна и Андрей Иванович, спасибо вам огромное! Профессионалы своего дела. Подкупила честность и подробное объяснение всех нюансов без “сказок”.</p>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="review-card">
+                            <h3>Лидия Пухова</h3>
+                            <div class="stars">★★★★★</div>
+                            <p>Очень долго сомневалась, но очень рада, что обратилась именно к вам. Спасибо большое за вашу работу 😊</p>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="review-card">
+                            <h3>Надежда Сорокина</h3>
+                            <div class="stars">★★★★★</div>
+                            <p>Большие профессионалы! Всё прошло отлично, очень рекомендую.</p>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="review-card">
+                            <h3>Ирина</h3>
+                            <div class="stars">★★★★★</div>
+                            <p>Очень рекомендую выбрать именно эту компанию. Всё подскажут, расскажут, всегда на связи, с ними была уверенность в положительном завершении.</p>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="review-card">
+                            <h3>Наталья Горчакова</h3>
+                            <div class="stars">★★★★★</div>
+                            <p>Выражаю огромную благодарность за помощь в списании долгов. Очень хорошие люди и отличные специалисты.</p>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="review-card">
+                            <h3>Галичина Екатерина</h3>
+                            <div class="stars">★★★★★</div>
+                            <p>Очень хорошие сотрудники, всё прошло отлично, долги списались быстро. Рекомендую!</p>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="review-card">
+                            <h3>Александр Новиков</h3>
+                            <div class="stars">★★★★★</div>
+                            <p>Благодарю всю компанию и сотрудников за помощь в списании долгов. Работали и держали обратную связь на протяжении всей процедуры.</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-prev reviews-prev"></div>
+                <div class="swiper-button-next reviews-next"></div>
+            </div>
+        </section>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        new Swiper('.reviewsSwiper', {
+            loop: true,
+            spaceBetween: 20,
+            autoplay: {
+                delay: 4000,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.reviews-next',
+                prevEl: '.reviews-prev',
+            },
+            breakpoints: {
+                0: {
+                    slidesPerView: 1
+                },
+                768: {
+                    slidesPerView: 2
+                },
+                1024: {
+                    slidesPerView: 3
+                }
+            }
+        });
+    });
+</script>
 @endsection

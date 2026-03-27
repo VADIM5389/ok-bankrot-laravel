@@ -7,13 +7,13 @@
 
     <link rel="icon" href="https://avatars.mds.yandex.net/i?id=c93efa4ee54a2f270564355a35d3daf1_l-9181971-images-thumbs&n=13" type="image/x-icon">
     <link rel="shortcut icon" href="https://avatars.mds.yandex.net/i?id=c93efa4ee54a2f270564355a35d3daf1_l-9181971-images-thumbs&n=13" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />   
 
     <title>ОК-банкрот|Главная</title>
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-
+    
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/inputmask/dist/jquery.inputmask.min.js"></script>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 </head>
@@ -220,5 +220,9 @@
             });
         });
     </script>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 </body>
 </html>
