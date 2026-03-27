@@ -1080,6 +1080,96 @@ iframe {
   }
 }
 
+/* Визуализация результата калькулятора */
+
+.calculator-visual {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  gap: 24px;
+  margin-top: 24px;
+  align-items: stretch;
+}
+
+.calculator-visual__chart {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 20px;
+  min-height: 360px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+}
+
+.calculator-visual__chart canvas {
+  width: 100% !important;
+  height: 320px !important;
+}
+
+.calculator-visual__info {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.visual-info-card {
+  background: rgba(255, 255, 255, 0.75);
+  border-radius: 14px;
+  padding: 16px 18px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.visual-info-card span {
+  display: block;
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.visual-info-card strong {
+  font-size: 20px;
+  color: #222;
+}
+
+@media (max-width: 900px) {
+  .calculator-visual {
+    grid-template-columns: 1fr;
+  }
+
+  .calculator-visual__chart {
+    min-height: 300px;
+  }
+
+  .calculator-visual__chart canvas {
+    height: 260px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .calculator-visual {
+    gap: 18px;
+    margin-top: 18px;
+  }
+
+  .calculator-visual__chart {
+    padding: 16px;
+    border-radius: 16px;
+    min-height: 260px;
+  }
+
+  .calculator-visual__chart canvas {
+    height: 220px !important;
+  }
+
+  .visual-info-card {
+    padding: 14px 16px;
+  }
+
+  .visual-info-card strong {
+    font-size: 18px;
+  }
+}
+
+/* Конец визуализации результата калькулятора */
+
 /* Конец калькулятора */
 
 /* Личный кабинет */

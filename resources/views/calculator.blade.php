@@ -120,7 +120,7 @@
                             <span class="tooltip-icon">
                                 ?
                                 <span class="tooltip-text">
-                                    Укажите примерную стоимость имущества, которое не относится к предметам первой необходимости и потенциально может учитываться при погашении долгов. Например: автомобиль, дополнительная недвижимость, дорогостоящая техника или иное ценное имущество.
+                                    Укажите примерную стоимость имущества, которое не относится к предметам первой необходимости и потенциально может учитываться при погашении долгов.
                                 </span>
                             </span>
                         </label>
@@ -144,11 +144,104 @@
             </form>
         </div>
 
-        @if(isset($result))
+        @if(isset($result) && isset($chartData))
             <div class="calculator-result calculator-result--{{ $result['type'] }}">
                 <h2>{{ $result['title'] }}</h2>
                 <p class="calculator-result__text">{{ $result['description'] }}</p>
+
+                <div class="calculator-visual">
+                    <div class="calculator-visual__chart">
+                        <canvas id="financeChart"></canvas>
+                    </div>
+
+                    <div class="calculator-visual__info">
+                        <div class="visual-info-card">
+                            <span>Ежемесячный доход</span>
+                            <strong>{{ number_format($chartData['income'], 0, ',', ' ') }} ₽</strong>
+                        </div>
+
+                        <div class="visual-info-card">
+                            <span>Обязательные расходы</span>
+                            <strong>{{ number_format($chartData['expenses'], 0, ',', ' ') }} ₽</strong>
+                        </div>
+
+                        <div class="visual-info-card">
+                            <span>Текущий платёж</span>
+                            <strong>{{ number_format($chartData['currentPayment'], 0, ',', ' ') }} ₽</strong>
+                        </div>
+
+                        <div class="visual-info-card">
+                            <span>Свободный остаток</span>
+                            <strong>{{ number_format($chartData['freeMoney'], 0, ',', ' ') }} ₽</strong>
+                        </div>
+
+                        <div class="visual-info-card">
+                            <span>Платёж при реструктуризации (36 мес.)</span>
+                            <strong>{{ number_format($chartData['restructPayment'], 0, ',', ' ') }} ₽</strong>
+                        </div>
+                    </div>
+                </div>
             </div>
+
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    const ctx = document.getElementById('financeChart');
+
+                    if (ctx) {
+                        new Chart(ctx, {
+                            type: 'bar',
+                            data: {
+                                labels: [
+                                    'Доход',
+                                    'Расходы',
+                                    'Текущий платёж',
+                                    'Свободный остаток',
+                                    'Реструктуризация'
+                                ],
+                                datasets: [{
+                                    label: 'Сумма, ₽',
+                                    data: [
+                                        {{ $chartData['income'] }},
+                                        {{ $chartData['expenses'] }},
+                                        {{ $chartData['currentPayment'] }},
+                                        {{ $chartData['freeMoney'] }},
+                                        {{ $chartData['restructPayment'] }}
+                                    ],
+                                    borderWidth: 1,
+                                    borderRadius: 8
+                                }]
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                plugins: {
+                                    legend: {
+                                        display: false
+                                    },
+                                    tooltip: {
+                                        callbacks: {
+                                            label: function(context) {
+                                                return context.raw.toLocaleString('ru-RU') + ' ₽';
+                                            }
+                                        }
+                                    }
+                                },
+                                scales: {
+                                    y: {
+                                        beginAtZero: true,
+                                        ticks: {
+                                            callback: function(value) {
+                                                return value.toLocaleString('ru-RU') + ' ₽';
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        });
+                    }
+                });
+            </script>
         @endif
 
         <div class="calculator-note">
