@@ -638,6 +638,7 @@ iframe {
 
 /* Почему выбирают нас */
 
+
 .about-page {
   background-color: #f8f9fa;
   padding: 40px 15px 60px;
@@ -1396,10 +1397,78 @@ iframe {
 
 /* Конец личного кабинета */
 
+/* Всплывающие уведомления */
 
+.toast-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 5000;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 380px;
+}
 
+.toast {
+  padding: 16px 18px;
+  border-radius: 14px;
+  color: #fff;
+  font-size: 15px;
+  line-height: 1.5;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.18);
+  animation: toastSlideIn 0.35s ease;
+}
 
+.toast--success {
+  background: #1f7a35;
+}
 
+.toast--error {
+  background: #d72f15;
+}
+
+.toast.hide {
+  animation: toastFadeOut 0.35s ease forwards;
+}
+
+@keyframes toastSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes toastFadeOut {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+}
+
+@media (max-width: 768px) {
+  .toast-container {
+    top: 12px;
+    right: 12px;
+    left: 12px;
+    max-width: none;
+  }
+
+  .toast {
+    font-size: 14px;
+    padding: 14px 16px;
+  }
+}
+
+/* Конец уведомлений */
 
 
 

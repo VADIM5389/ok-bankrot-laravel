@@ -15,25 +15,34 @@ class AuthController extends Controller
         return view('register');
     }
 
-    public function register(Request $request){
-
-        $validate = $request->validate([
-            'email' => 'required:unique:users',
-        ], ['email.unique'=>'Эта почта уже занята!'
+    public function register(Request $request)
+    {
+        $validated = $request->validate([
+            'email' => ['required', 'email', 'unique:users,email'],
+            'full_name' => ['required', 'string', 'max:255'],
+            'phone' => ['required', 'string', 'max:25'],
+            'password' => ['required', 'string', 'min:6'],
+        ], [
+            'email.required' => 'Введите email.',
+            'email.email' => 'Введите корректный email.',
+            'email.unique' => 'Аккаунт с таким email уже существует.',
+            'full_name.required' => 'Введите ФИО.',
+            'phone.required' => 'Введите телефон.',
+            'password.required' => 'Введите пароль.',
+            'password.min' => 'Пароль должен содержать не менее 6 символов.',
         ]);
-        $password = Hash::make($request->password);
 
-        // Создаем нового пользователя
-        User::create([
-
-            'email' => $request->email,
-            'full_name' => $request->full_name,
-            'phone' => $request->phone,            
-            'password' => $password,
+        $user = \App\Models\User::create([
+            'email' => $validated['email'],
+            'full_name' => $validated['full_name'],
+            'phone' => $validated['phone'],
+            'password' => bcrypt($validated['password']),
+            'role' => 'user',
         ]);
 
-        // Можно выполнить вход пользователя или перенаправить
-        return redirect('/')->with('success', 'Регистрация прошла успешно.');
+        auth()->login($user);
+
+        return redirect()->route('account')->with('success', 'Регистрация прошла успешно.');
     }
 
     public function showLogin(){

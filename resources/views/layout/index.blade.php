@@ -148,33 +148,29 @@
     <main>
         @yield('main')
 
-        @if (session('success'))
-            <div class="message-success">
-                {{ session('success') }}
-            </div>
-        @endif
+    @if (session('success') || session('error') || $errors->any())
+        <div class="toast-container" id="toastContainer">
+            @if (session('success'))
+                <div class="toast toast--success">
+                    {{ session('success') }}
+                </div>
+            @endif
 
-        @if (session('error'))
-            <div class="message-error">
-                {{ session('error') }}
-            </div>
-        @endif
+            @if (session('error'))
+                <div class="toast toast--error">
+                    {{ session('error') }}
+                </div>
+            @endif
 
-        @if ($errors->any())
-            <div class="message-validate">
+            @if ($errors->any())
                 @foreach ($errors->all() as $error)
-                    {{ $error }}
+                    <div class="toast toast--error">
+                        {{ $error }}
+                    </div>
                 @endforeach
-            </div>
-        @endif
-
-        @if ($errors->any())
-            <div class="message-error">
-                @foreach ($errors->all() as $error)
-                    <div>{{ $error }}</div>
-                @endforeach
-            </div>
-        @endif
+            @endif
+        </div>
+    @endif
     </main>
 
     <footer>
@@ -223,7 +219,26 @@
         });
     </script>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const toasts = document.querySelectorAll('.toast');
 
+            if (toasts.length) {
+                setTimeout(() => {
+                    toasts.forEach(toast => {
+                        toast.classList.add('hide');
+                    });
+
+                    setTimeout(() => {
+                        const container = document.getElementById('toastContainer');
+                        if (container) {
+                            container.remove();
+                        }
+                    }, 400);
+                }, 4000);
+            }
+        });
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 </body>
