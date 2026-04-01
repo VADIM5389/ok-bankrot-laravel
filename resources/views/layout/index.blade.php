@@ -50,7 +50,7 @@
                         @endif
 
                         @if (auth()->user()->role == 'admin')
-                            <a href="{{ route('about') }}">Админ панель</a>
+                            <a href="{{ route('admin.index') }}">Админ панель</a>
                             <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 Выход
                             </a>

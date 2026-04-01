@@ -67,6 +67,7 @@
             <div class="swiper reviewsSwiper">
                 <div class="swiper-wrapper">
 
+                    {{-- Статические отзывы --}}
                     <div class="swiper-slide">
                         <div class="review-card">
                             <h3>Жанна Александрова</h3>
@@ -138,6 +139,19 @@
                             <p>Благодарю всю компанию и сотрудников за помощь в списании долгов. Работали и держали обратную связь на протяжении всей процедуры.</p>
                         </div>
                     </div>
+
+                    {{-- Отзывы из БД, одобренные модерацией --}}
+                    @if(isset($reviews) && $reviews->count())
+                        @foreach($reviews as $review)
+                            <div class="swiper-slide">
+                                <div class="review-card">
+                                    <h3>{{ $review->name }}</h3>
+                                    <div class="stars">★★★★★</div>
+                                    <p>{{ $review->text }}</p>
+                                </div>
+                            </div>
+                        @endforeach
+                    @endif
 
                 </div>
 
