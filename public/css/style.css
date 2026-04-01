@@ -196,6 +196,142 @@ img {
 }
 /* конец красивой шапки */
 
+/* Админка */
+
+.admin-page {
+  background-color: #f8f9fa;
+  padding: 40px 15px 60px;
+}
+
+.admin-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.admin-title {
+  text-align: center;
+  font-size: 36px;
+  color: #222;
+  margin-bottom: 24px;
+}
+
+.admin-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.admin-stat-card {
+  display: block;
+  text-decoration: none;
+  background: #fff;
+  border-radius: 20px;
+  padding: 28px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  color: #222;
+  border: 1px solid #ececec;
+}
+
+.admin-stat-card h2 {
+  margin: 0 0 12px;
+}
+
+.admin-table-wrap {
+  background: #fff;
+  border-radius: 20px;
+  padding: 20px;
+  overflow-x: auto;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.admin-table th,
+.admin-table td {
+  padding: 14px 12px;
+  border-bottom: 1px solid #ececec;
+  text-align: left;
+  vertical-align: top;
+}
+
+.admin-table th {
+  background: #f8f9fa;
+}
+
+.admin-select {
+  height: 40px;
+  border: 1px solid #d8d8d8;
+  border-radius: 10px;
+  padding: 0 10px;
+  margin-bottom: 8px;
+}
+
+.admin-btn {
+  border: none;
+  background-color: #d72f15;
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 18px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.admin-back {
+  margin-top: 20px;
+}
+
+.admin-link {
+  color: #d72f15 !important;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.review-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.review-textarea {
+  width: 100%;
+  border: 1px solid #d8d8d8;
+  border-radius: 14px;
+  padding: 14px;
+  font-size: 16px;
+  resize: vertical;
+  outline: none;
+}
+
+.review-textarea:focus {
+  border-color: #fcc415;
+  box-shadow: 0 0 0 3px rgba(252, 196, 21, 0.2);
+}
+
+@media (max-width: 992px) {
+  .admin-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .admin-page {
+    padding: 25px 12px 40px;
+  }
+
+  .admin-title {
+    font-size: 28px;
+  }
+
+  .admin-table-wrap {
+    padding: 14px;
+    border-radius: 16px;
+  }
+}
+
+/* конец  админки */
 
 /* Модальные окна */
 

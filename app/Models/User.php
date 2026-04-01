@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\CallbackRequest;
+use App\Models\Review;
 
 class User extends Authenticatable
 {
@@ -48,5 +50,25 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function callbackRequests()
+    {
+        return $this->hasMany(CallbackRequest::class);
+    }
+
+    public function processedRequests()
+    {
+        return $this->hasMany(CallbackRequest::class, 'processed_by');
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
+
+    public function approvedReviews()
+    {
+        return $this->hasMany(Review::class, 'approved_by');
     }
 }

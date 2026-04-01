@@ -20,13 +20,15 @@ class CallbackRequestController extends Controller
         ]);
 
         $callbackRequest = CallbackRequest::create([
+            'user_id' => auth()->check() ? auth()->id() : null,
             'full_name' => $validated['full_name'],
             'phone' => $validated['phone'],
             'status' => 'new',
         ]);
 
         try {
-            $webhookUrl = rtrim((string) config('services.bitrix.webhook_url'), '/');
+            $webhookUrl = (string) (config('services.bitrix.webhook_url') ?: env('BITRIX_WEBHOOK_URL'));
+            $webhookUrl = rtrim($webhookUrl, '/');
 
             if (empty($webhookUrl)) {
                 throw new \Exception('BITRIX_WEBHOOK_URL не настроен');
@@ -40,12 +42,6 @@ class CallbackRequestController extends Controller
                 'fields[PHONE][0][VALUE]' => $validated['phone'],
                 'fields[PHONE][0][VALUE_TYPE]' => 'WORK',
                 'fields[COMMENTS]' => 'Заявка оставлена через форму "Заказать звонок" на сайте OK-Банкрот.',
-            ]);
-
-            Log::info('Bitrix debug', [
-                'url' => $url,
-                'status' => $response->status(),
-                'body' => $response->body(),
             ]);
 
             $responseData = $response->json();
