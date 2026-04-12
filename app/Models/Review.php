@@ -10,6 +10,7 @@ class Review extends Model
         'user_id',
         'name',
         'text',
+        'rating',
         'status',
         'approved_by',
     ];

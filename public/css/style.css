@@ -1750,6 +1750,36 @@ iframe {
   }
 }
 
+/* звёзды */
+.rating-input {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.rating-input input {
+  display: none;
+}
+
+.rating-input label {
+  font-size: 24px;
+  cursor: pointer;
+  color: #ccc;
+  transition: 0.2s;
+}
+
+.rating-input input:checked ~ label,
+.rating-input label:hover,
+.rating-input label:hover ~ label {
+  color: #fabb30;
+}
+
+.stars {
+  color: #fabb30;
+  font-size: 18px;
+  margin-bottom: 6px;
+}
 /* Конец блока отзывов */
 
 /* Страница услуг */

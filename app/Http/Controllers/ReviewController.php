@@ -11,16 +11,14 @@ class ReviewController extends Controller
     {
         $validated = $request->validate([
             'text' => ['required', 'string', 'min:10', 'max:1000'],
-        ], [
-            'text.required' => 'Введите текст отзыва.',
-            'text.min' => 'Отзыв должен содержать не менее 10 символов.',
-            'text.max' => 'Отзыв не должен быть слишком длинным.',
+            'rating' => ['required', 'integer', 'min:1', 'max:5'],
         ]);
 
         Review::create([
             'user_id' => auth()->id(),
             'name' => auth()->user()->full_name,
-            'text' => $validated['text'],
+            'text' => $validated['text'],   
+            'rating' => $validated['rating'],
             'status' => 'pending',
         ]);
 

@@ -146,7 +146,15 @@
                             <div class="swiper-slide">
                                 <div class="review-card">
                                     <h3>{{ $review->name }}</h3>
-                                    <div class="stars">★★★★★</div>
+                                    <div class="stars">
+                                        @for($i = 1; $i <= 5; $i++)
+                                            @if($i <= $review->rating)
+                                                ★
+                                            @else
+                                                ☆
+                                            @endif
+                                        @endfor
+                                    </div>
                                     <p>{{ $review->text }}</p>
                                 </div>
                             </div>

@@ -102,6 +102,13 @@
 
             <form action="{{ route('reviews.store') }}" method="POST" class="review-form">
                 @csrf
+                <label>Оценка</label>
+                    <div class="rating-input">
+                        @for($i = 5; $i >= 1; $i--)
+                            <input type="radio" name="rating" value="{{ $i }}" id="star{{ $i }}" {{ $i == 5 ? 'checked' : '' }}>
+                            <label for="star{{ $i }}">★</label>
+                        @endfor
+                    </div>
                 <textarea name="text" rows="5" placeholder="Напишите ваш отзыв..." class="review-textarea">{{ old('text') }}</textarea>
                 <button type="submit" class="calculator-btn">Отправить отзыв</button>
             </form>

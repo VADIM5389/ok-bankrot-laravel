@@ -33,7 +33,6 @@
                                 <form action="{{ route('admin.requests.status', $item) }}" method="POST">
                                     @csrf
                                     <select name="status" class="admin-select">
-                                        <option value="new" @selected($item->status === 'new')>Новая</option>
                                         <option value="sent" @selected($item->status === 'sent')>Отправлена</option>
                                         <option value="in_progress" @selected($item->status === 'in_progress')>В работе</option>
                                         <option value="done" @selected($item->status === 'done')>Завершена</option>
