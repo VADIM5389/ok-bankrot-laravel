@@ -28,15 +28,67 @@ class AdminController extends Controller
         ]);
     }
 
-    public function requests()
+    public function requests(Request $request)
     {
         $this->checkAdmin();
 
-        $requests = CallbackRequest::with(['user', 'processedBy'])
-            ->latest()
-            ->get();
+        $validated = $request->validate([
+            'search' => ['nullable', 'string', 'max:255'],
+            'phone' => ['nullable', 'string', 'max:30'],
+            'status' => ['nullable', 'in:new,sent,in_progress,done,error'],
+            'date_from' => ['nullable', 'date'],
+            'date_to' => ['nullable', 'date', 'after_or_equal:date_from'],
+        ]);
 
-        return view('admin.requests', compact('requests'));
+        $query = CallbackRequest::with(['user', 'processedBy'])
+            ->latest();
+
+        if (!empty($validated['search'])) {
+            $search = trim($validated['search']);
+
+            $query->where(function ($q) use ($search) {
+                $q->where('full_name', 'like', "%{$search}%")
+                    ->orWhereHas('user', function ($userQuery) use ($search) {
+                        $userQuery->where('full_name', 'like', "%{$search}%")
+                            ->orWhere('email', 'like', "%{$search}%");
+                    });
+            });
+        }
+
+        if (!empty($validated['phone'])) {
+            $phone = trim($validated['phone']);
+
+            $query->where(function ($q) use ($phone) {
+                $q->where('phone', 'like', "%{$phone}%")
+                    ->orWhereHas('user', function ($userQuery) use ($phone) {
+                        $userQuery->where('phone', 'like', "%{$phone}%");
+                    });
+            });
+        }
+
+        if (!empty($validated['status'])) {
+            $query->where('status', $validated['status']);
+        }
+
+        if (!empty($validated['date_from'])) {
+            $query->whereDate('created_at', '>=', $validated['date_from']);
+        }
+
+        if (!empty($validated['date_to'])) {
+            $query->whereDate('created_at', '<=', $validated['date_to']);
+        }
+
+        $requests = $query->paginate(10)->withQueryString();
+
+        $statusLabels = [
+            'new' => 'Новая',
+            'sent' => 'Отправлена',
+            'in_progress' => 'В работе',
+            'done' => 'Завершена',
+            'error' => 'Ошибка',
+        ];
+
+        return view('admin.requests', compact('requests', 'statusLabels'));
     }
 
     public function updateRequestStatus(Request $request, CallbackRequest $callbackRequest)
@@ -44,7 +96,7 @@ class AdminController extends Controller
         $this->checkAdmin();
 
         $validated = $request->validate([
-            'status' => ['required', 'string'],
+            'status' => ['required', 'in:new,sent,in_progress,done,error'],
         ]);
 
         $callbackRequest->update([

@@ -10,7 +10,7 @@ use App\Models\Review;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    $reviews = Review::where('status', 'approved')->latest()->take(9)->get();
+    $reviews = Review::where('status', 'approved')->latest()->get();
     return view('welcome', compact('reviews'));
 })->name('main');
 
@@ -43,10 +43,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::post('/callback-request', [CallbackRequestController::class, 'store'])->name('callback-request.store');
 
-Route::get('/', function () {
-    $reviews = Review::where('status', 'approved')->latest()->get();
-    return view('welcome', compact('reviews'));
-})->name('main');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/account', [AccountController::class, 'showAccount'])->name('account');
