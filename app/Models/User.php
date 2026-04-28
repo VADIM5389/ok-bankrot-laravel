@@ -2,21 +2,21 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\CallbackRequest;
+use App\Models\Review;
+use App\Notifications\VerifyEmailNotification;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
-use App\Models\CallbackRequest;
-use App\Models\Review;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
     /**
-     * The attributes that are mass assignable.
+     * Атрибуты, которые можно массово заполнять.
      *
      * @var list<string>
      */
@@ -26,11 +26,10 @@ class User extends Authenticatable
         'phone',
         'password',
         'role',
-        
     ];
 
     /**
-     * The attributes that should be hidden for serialization.
+     * Атрибуты, которые нужно скрывать при сериализации.
      *
      * @var list<string>
      */
@@ -40,7 +39,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * Get the attributes that should be cast.
+     * Приведение типов атрибутов.
      *
      * @return array<string, string>
      */
@@ -52,21 +51,41 @@ class User extends Authenticatable
         ];
     }
 
+    /**
+     * Отправка кастомного письма для подтверждения email.
+     */
+    public function sendEmailVerificationNotification()
+    {
+        $this->notify(new VerifyEmailNotification);
+    }
+
+    /**
+     * Заявки пользователя на обратный звонок.
+     */
     public function callbackRequests()
     {
         return $this->hasMany(CallbackRequest::class);
     }
 
+    /**
+     * Заявки, обработанные администратором.
+     */
     public function processedRequests()
     {
         return $this->hasMany(CallbackRequest::class, 'processed_by');
     }
 
+    /**
+     * Отзывы пользователя.
+     */
     public function reviews()
     {
         return $this->hasMany(Review::class);
     }
 
+    /**
+     * Отзывы, проверенные администратором.
+     */
     public function approvedReviews()
     {
         return $this->hasMany(Review::class, 'approved_by');

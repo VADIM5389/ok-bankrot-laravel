@@ -2,16 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Auth;
 use App\Models\User;
-
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-
-    public function showRegister(){
+    public function showRegister()
+    {
         return view('register');
     }
 
@@ -32,7 +31,7 @@ class AuthController extends Controller
             'password.min' => 'Пароль должен содержать не менее 6 символов.',
         ]);
 
-        $user = \App\Models\User::create([
+        $user = User::create([
             'email' => $validated['email'],
             'full_name' => $validated['full_name'],
             'phone' => $validated['phone'],
@@ -40,12 +39,17 @@ class AuthController extends Controller
             'role' => 'user',
         ]);
 
+        event(new Registered($user));
+
         auth()->login($user);
 
-        return redirect()->route('account')->with('success', 'Регистрация прошла успешно.');
+        return redirect()
+            ->route('verification.notice')
+            ->with('success', 'Регистрация прошла успешно. Подтвердите почту, чтобы пользоваться личным кабинетом.');
     }
 
-    public function showLogin(){
+    public function showLogin()
+    {
         return view('login');
     }
 
@@ -71,14 +75,22 @@ class AuthController extends Controller
 
         $request->session()->regenerate();
 
+        if (!auth()->user()->hasVerifiedEmail()) {
+            return redirect()
+                ->route('verification.notice')
+                ->with('warning', 'Сначала подтвердите адрес электронной почты.');
+        }
+
         return redirect()->route('account');
     }
 
-   
-
-    public function logout()
+    public function logout(Request $request)
     {
         Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
         return redirect()->route('main');
     }
 }
