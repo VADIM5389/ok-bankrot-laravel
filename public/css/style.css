@@ -411,10 +411,50 @@ img {
   background: #e7e7e7;
 }
 
+/* Действия в таблице заявок */
+
+.admin-actions-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 220px;
+}
+
 .admin-status-form {
   display: flex;
   gap: 8px;
   align-items: center;
+}
+
+.admin-status-form .admin-select {
+  flex: 1;
+  margin-bottom: 0;
+}
+
+.admin-delete-form {
+  margin: 0;
+}
+
+.admin-delete-btn {
+  width: 100%;
+  border: 1px solid #f1b7b0;
+  background-color: #fff5f3;
+  color: #b42318;
+  padding: 10px 16px;
+  border-radius: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.admin-delete-btn:hover {
+  background-color: #d72f15;
+  border-color: #d72f15;
+  color: #fff;
+}
+
+.admin-delete-btn:active {
+  transform: scale(0.98);
 }
 
 /* Статусы заявок */
@@ -544,13 +584,18 @@ img {
     width: 100%;
   }
 
+  .admin-actions-cell {
+    min-width: 0;
+  }
+
   .admin-status-form {
     flex-direction: column;
     align-items: stretch;
   }
 
   .admin-status-form .admin-btn,
-  .admin-status-form .admin-select {
+  .admin-status-form .admin-select,
+  .admin-delete-btn {
     width: 100%;
   }
 
@@ -559,6 +604,76 @@ img {
     padding: 12px 10px;
     font-size: 14px;
   }
+}
+
+/* Нормальная пагинация в админке */
+
+.admin-pagination {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.admin-pagination nav {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.admin-pagination .flex {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.admin-pagination a,
+.admin-pagination span {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  min-width: 34px;
+  height: 34px;
+  padding: 0 10px !important;
+  border-radius: 10px;
+  font-size: 14px !important;
+  font-weight: 700;
+  line-height: 1 !important;
+  text-decoration: none;
+}
+
+.admin-pagination svg {
+  width: 16px !important;
+  height: 16px !important;
+  max-width: 16px !important;
+  max-height: 16px !important;
+}
+
+.admin-pagination p,
+.admin-pagination .text-sm,
+.admin-pagination .text-gray-700 {
+  font-size: 13px !important;
+  margin: 0 0 10px 0 !important;
+}
+
+.admin-pagination .hidden {
+  display: none !important;
+}
+
+.admin-pagination a {
+  background: #fff;
+  color: #222 !important;
+  border: 1px solid #ddd;
+}
+
+.admin-pagination a:hover {
+  background: #f5f5f5;
+  border-color: #ccc;
+}
+
+.admin-pagination span[aria-current="page"] span {
+  background: #d72f15 !important;
+  border-color: #d72f15 !important;
+  color: #fff !important;
 }
 /* конец  админки */
 
@@ -2146,6 +2261,7 @@ iframe {
 }
 
 /* Конец страницы услуг */
+
 /* подтвеерждение почты */
 
 .verify-page {

@@ -107,6 +107,15 @@ class AdminController extends Controller
         return back()->with('success', 'Статус заявки обновлён.');
     }
 
+    public function deleteRequest(CallbackRequest $callbackRequest)
+    {
+        $this->checkAdmin();
+
+        $callbackRequest->delete();
+
+        return back()->with('success', 'Заявка удалена.');
+    }
+
     public function reviews()
     {
         $this->checkAdmin();

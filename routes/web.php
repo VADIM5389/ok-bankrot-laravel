@@ -119,24 +119,19 @@ Route::prefix('admin')
     ->name('admin.')
     ->middleware(['auth', 'verified'])
     ->group(function () {
-        Route::get('/', [AdminController::class, 'index'])
-            ->name('index');
+        Route::get('/', [AdminController::class, 'index'])->name('index');
 
-        Route::get('/requests', [AdminController::class, 'requests'])
-            ->name('requests');
+        Route::get('/requests', [AdminController::class, 'requests'])->name('requests');
 
-        Route::post('/requests/{callbackRequest}/status', [AdminController::class, 'updateRequestStatus'])
-            ->name('requests.status');
+        Route::post('/requests/{callbackRequest}/status', [AdminController::class, 'updateRequestStatus'])->name('requests.status');
 
-        Route::get('/reviews', [AdminController::class, 'reviews'])
-            ->name('reviews');
+        Route::delete('/requests/{callbackRequest}', [AdminController::class, 'deleteRequest'])->name('requests.delete');
 
-        Route::post('/reviews/{review}/status', [AdminController::class, 'updateReviewStatus'])
-            ->name('reviews.status');
+        Route::get('/reviews', [AdminController::class, 'reviews'])->name('reviews');
 
-        Route::get('/users', [AdminController::class, 'users'])
-            ->name('users');
+        Route::post('/reviews/{review}/status', [AdminController::class, 'updateReviewStatus'])->name('reviews.status');
 
-        Route::post('/users/{user}/role', [AdminController::class, 'updateUserRole'])
-            ->name('users.role');
+        Route::get('/users', [AdminController::class, 'users'])->name('users');
+
+        Route::post('/users/{user}/role', [AdminController::class, 'updateUserRole'])->name('users.role');
     });

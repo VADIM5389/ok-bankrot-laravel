@@ -94,7 +94,6 @@
                         <th>Телефон</th>
                         <th>Статус</th>
                         <th>Пользователь</th>
-                        <th>Обработал</th>
                         <th>Дата</th>
                         <th>Действие</th>
                     </tr>
@@ -112,27 +111,42 @@
                                 </span>
                             </td>
                             <td>{{ $item->user->full_name ?? '—' }}</td>
-                            <td>{{ $item->processedBy->full_name ?? '—' }}</td>
                             <td>{{ optional($item->created_at)->format('d.m.Y H:i') }}</td>
                             <td>
-                                <form action="{{ route('admin.requests.status', $item) }}" method="POST" class="admin-status-form">
-                                    @csrf
+                                <div class="admin-actions-cell">
+                                    <form action="{{ route('admin.requests.status', $item) }}" method="POST" class="admin-status-form">
+                                        @csrf
 
-                                    <select name="status" class="admin-select">
-                                        @foreach($statusLabels as $statusValue => $statusName)
-                                            <option value="{{ $statusValue }}" @selected($item->status === $statusValue)>
-                                                {{ $statusName }}
-                                            </option>
-                                        @endforeach
-                                    </select>
+                                        <select name="status" class="admin-select">
+                                            @foreach($statusLabels as $statusValue => $statusName)
+                                                <option value="{{ $statusValue }}" @selected($item->status === $statusValue)>
+                                                    {{ $statusName }}
+                                                </option>
+                                            @endforeach
+                                        </select>
 
-                                    <button type="submit" class="admin-btn">Сохранить</button>
-                                </form>
+                                        <button type="submit" class="admin-btn admin-save-btn">Сохранить</button>
+                                    </form>
+
+                                    <form
+                                        action="{{ route('admin.requests.delete', $item) }}"
+                                        method="POST"
+                                        class="admin-delete-form"
+                                        onsubmit="return confirm('Вы действительно хотите удалить эту заявку?');"
+                                    >
+                                        @csrf
+                                        @method('DELETE')
+
+                                        <button type="submit" class="admin-delete-btn">
+                                            Удалить заявку
+                                        </button>
+                                    </form>
+                                </div>
                             </td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="8" class="admin-empty">
+                            <td colspan="7" class="admin-empty">
                                 Заявки по выбранным фильтрам не найдены.
                             </td>
                         </tr>
