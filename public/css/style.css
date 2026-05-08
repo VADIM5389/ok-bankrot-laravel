@@ -2348,10 +2348,12 @@ iframe {
 
 /* Подвал сайта */
 
+/* Подвал сайта */
+
 .site-footer {
   background: #fabb30;
   color: #222;
-  padding: 46px 15px 20px;
+  padding: 42px 15px 20px;
   margin-top: 60px;
 }
 
@@ -2359,8 +2361,8 @@ iframe {
   max-width: 1200px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1.6fr 1fr 1fr;
-  gap: 34px;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 46px;
   align-items: start;
 }
 
@@ -2371,7 +2373,7 @@ iframe {
 }
 
 .footer-brand p {
-  max-width: 390px;
+  max-width: 520px;
   color: #333;
   line-height: 1.6;
   margin-top: 14px;
@@ -2394,12 +2396,13 @@ iframe {
   margin-bottom: 10px;
   color: #333;
   font-weight: 500;
+  line-height: 1.5;
 }
 
 .footer-column a {
   color: #222;
   text-decoration: none;
-  font-weight: 600;
+  font-weight: 700;
   transition: 0.2s ease;
 }
 
@@ -2409,7 +2412,7 @@ iframe {
 
 .footer-bottom {
   max-width: 1200px;
-  margin: 34px auto 0;
+  margin: 32px auto 0;
   padding-top: 18px;
   border-top: 1px solid rgba(34, 34, 34, 0.18);
   display: flex;
@@ -2426,33 +2429,14 @@ iframe {
 
 /* Адаптив подвала */
 
-@media (max-width: 992px) {
-  .footer-container {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .footer-brand {
-    grid-column: 1 / -1;
-  }
-
-  .footer-bottom {
-    flex-direction: column;
-    text-align: center;
-  }
-}
-
-@media (max-width: 576px) {
+@media (max-width: 768px) {
   .site-footer {
-    padding: 36px 15px 18px;
+    padding: 34px 15px 18px;
   }
 
   .footer-container {
     grid-template-columns: 1fr;
-    gap: 26px;
-  }
-
-  .footer-brand {
-    grid-column: auto;
+    gap: 28px;
   }
 
   .footer-logo {
@@ -2465,6 +2449,11 @@ iframe {
 
   .footer-brand p {
     max-width: 100%;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
   }
 }
 /* конец подвала */

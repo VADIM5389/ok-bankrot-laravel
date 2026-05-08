@@ -185,28 +185,24 @@
             </p>
         </div>
 
-        <div class="footer-column">
+        <div class="footer-column footer-contacts">
             <h3>Контакты</h3>
 
             <ul>
-                <li>г. Курган</li>
-                <li><a href="tel:+79128369319">+7 (912) 836-93-19</a></li>
-                <li><a href="mailto:vadimzabolotskij55@gmail.com">vadimzabolotskij55@gmail.com</a></li>
-            </ul>
-        </div>
-
-        <div class="footer-column">
-            <h3>Для клиента</h3>
-
-            <ul>
-                @auth
-                    <li><a href="{{ route('account') }}">Личный кабинет</a></li>
-                @else
-                    <li><a href="#login-modal" rel="modal:open">Войти в аккаунт</a></li>
-                    <li><a href="#register-modal" rel="modal:open">Регистрация</a></li>
-                @endauth
-
-                <li><a href="#callback-modal" rel="modal:open">Заказать звонок</a></li>
+                <li>
+                    <span>📍</span>
+                    <strong>Адрес:</strong> Курган, ул. Коли Мяготина, 56а, оф. 506
+                </li>
+                <li>
+                    <span>📞</span>
+                    <strong>Телефон:</strong>
+                    <a href="tel:+73522225310">+7 (3522) 22-53-10</a>
+                </li>
+                <li>
+                    <span>✉️</span>
+                    <strong>Email:</strong>
+                    <a href="mailto:kurgan.okbankrot@yandex.ru">kurgan.okbankrot@yandex.ru</a>
+                </li>
             </ul>
         </div>
     </div>
