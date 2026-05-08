@@ -174,9 +174,48 @@
     @endif
     </main>
 
-    <footer>
-        Все права защищены
-    </footer>
+<footer class="site-footer">
+    <div class="footer-container">
+        <div class="footer-column footer-brand">
+            <img src="https://static.tildacdn.com/tild6335-3635-4135-b737-656238303137/logo.png" alt="ОК Банкрот" class="footer-logo">
+
+            <p>
+                ОК Банкрот — юридическая помощь гражданам в вопросах банкротства,
+                анализа финансового положения и сопровождения процедуры.
+            </p>
+        </div>
+
+        <div class="footer-column">
+            <h3>Контакты</h3>
+
+            <ul>
+                <li>г. Курган</li>
+                <li><a href="tel:+79128369319">+7 (912) 836-93-19</a></li>
+                <li><a href="mailto:vadimzabolotskij55@gmail.com">vadimzabolotskij55@gmail.com</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-column">
+            <h3>Для клиента</h3>
+
+            <ul>
+                @auth
+                    <li><a href="{{ route('account') }}">Личный кабинет</a></li>
+                @else
+                    <li><a href="#login-modal" rel="modal:open">Войти в аккаунт</a></li>
+                    <li><a href="#register-modal" rel="modal:open">Регистрация</a></li>
+                @endauth
+
+                <li><a href="#callback-modal" rel="modal:open">Заказать звонок</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>© {{ date('Y') }} ОК Банкрот. Все права защищены.</p>
+        <p>Информация на сайте не является публичной офертой.</p>
+    </div>
+</footer>
 
     <script>
         $(document).ready(function () {
