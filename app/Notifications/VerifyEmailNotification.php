@@ -30,12 +30,11 @@ class VerifyEmailNotification extends VerifyEmail
         $verificationUrl = $this->verificationUrl($notifiable);
 
         return (new MailMessage)
-            ->subject('Подтверждение регистрации на сайте ОК Банкрот')
-            ->greeting('Здравствуйте!')
-            ->line('Спасибо за регистрацию на сайте ОК Банкрот.')
-            ->line('Для завершения регистрации и доступа к личному кабинету подтвердите адрес электронной почты.')
-            ->action('Подтвердить почту', $verificationUrl)
-            ->line('Если вы не регистрировались на сайте, просто проигнорируйте это письмо.')
-            ->salutation('С уважением, команда ОК Банкрот');
+            ->subject('Подтвердите электронную почту — ОК Банкрот')
+            ->markdown('verify-email-mail', [
+                'user' => $notifiable,
+                'verificationUrl' => $verificationUrl,
+                'logoUrl' => 'https://static.tildacdn.com/tild6335-3635-4135-b737-656238303137/logo.png',
+            ]);
     }
 }

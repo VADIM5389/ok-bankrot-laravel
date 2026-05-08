@@ -86,10 +86,6 @@
                                     <strong>{{ $request->phone }}</strong>
                                 </div>
 
-                                <div class="request-card__row">
-                                    <span>Обработал:</span>
-                                    <strong>{{ $request->processedBy->full_name ?? 'Ещё не назначен' }}</strong>
-                                </div>
                             </div>
                         </div>
                     @endforeach
