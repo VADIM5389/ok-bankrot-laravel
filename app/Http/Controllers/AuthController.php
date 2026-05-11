@@ -11,7 +11,7 @@ class AuthController extends Controller
 {
     public function showRegister()
     {
-        return view('register');
+        return redirect()->route('main');
     }
 
     public function register(Request $request)
@@ -50,7 +50,7 @@ class AuthController extends Controller
 
     public function showLogin()
     {
-        return view('login');
+        return redirect()->route('main');
     }
 
     public function login(Request $request)

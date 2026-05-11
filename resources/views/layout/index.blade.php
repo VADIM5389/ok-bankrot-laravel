@@ -119,6 +119,16 @@
                 <input type="password" name="password" placeholder="Введите пароль" required>
 
                 <input type="submit" class="modal-submit" value="Войти">
+                <div class="modal-auth-links">
+                    <a href="{{ route('password.request') }}" class="modal-forgot-link">
+                        Забыли пароль?
+                    </a>
+
+                    <p>
+                        Нет аккаунта?
+                        <a href="#register-modal" rel="modal:open">Зарегистрируйтесь</a>
+                    </p>
+                </div>
             </form>
         </div>
 
@@ -142,6 +152,12 @@
                 <input type="password" name="password" placeholder="Введите пароль" required>
 
                 <input type="submit" class="modal-submit" value="Зарегистрироваться">
+                <div class="modal-auth-links">
+                    <p>
+                        Уже есть аккаунт?
+                        <a href="#login-modal" rel="modal:open">Войдите</a>
+                    </p>
+                </div>
             </form>
         </div>
     </header>
