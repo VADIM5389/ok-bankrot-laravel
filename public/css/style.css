@@ -1220,25 +1220,22 @@ iframe {
 }
 
 .faq-answer {
-    padding: 0;
-    max-height: 0;
-    overflow: hidden;
-    background: white;
-    transition: all 0.3s ease;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.3s ease;
+  padding: 0 20px;
 }
 
 .faq-answer p {
-    padding: 0 25px 20px;
-    margin: 0;
-    line-height: 1.6;
-    color: #555;
-    font-size: 15px;
+  margin: 0 0 12px;
+  line-height: 1.6;
+  color: #444;
 }
 
 /* Активный */
 .faq-item.active .faq-answer {
-    max-height: 200px;
-    padding-top: 0;
+  max-height: 2000px;
+  padding: 0 20px 20px;
 }
 
 .faq-item.active .faq-icon {
@@ -1252,6 +1249,10 @@ iframe {
 
 .faq-item.active .faq-question .faq-icon {
     color: white;
+}
+
+.faq-answer p:last-child {
+  margin-bottom: 0;
 }
 /* Конец FAQ */
 
