@@ -27,21 +27,23 @@ class CalculatorController extends Controller
         $monthlyDebtPayment = (float) $validated['monthlyDebtPayment'];
         $realizableAssets = (float) $validated['realizableAssets'];
 
-        $freeMoney = $incomePerMonth - ($monthlyExpenses + $monthlyDebtPayment);
+        // Денежные средства после обязательных расходов
+        $availableMoney = $incomePerMonth - $monthlyExpenses;
 
-        // Для отображения в графике отрицательное значение не даём,
-        // чтобы график не ломался визуально
-        $freeMoneyForChart = max($freeMoney, 0);
+        // Реальный остаток после текущего ежемесячного платежа по долгам.
+        // Может быть отрицательным, потому что в финансовом расчёте важно видеть дефицит.
+        $freeMoney = $incomePerMonth - $monthlyExpenses - $monthlyDebtPayment;
 
+        // Условный платёж при реструктуризации на 36 месяцев
         $restructPayment = $totalDebt / 36;
 
-        if ($monthlyDebtPayment <= ($incomePerMonth - $monthlyExpenses)) {
+        if ($monthlyDebtPayment <= $availableMoney) {
             $result = [
                 'type' => 'success',
                 'title' => 'Критических признаков неплатёжеспособности не выявлено',
                 'description' => 'По введённым данным текущий ежемесячный платёж по обязательствам не превышает объём денежных средств, остающихся после обязательных расходов. Это может свидетельствовать о том, что на данный момент долговая нагрузка является контролируемой.',
             ];
-        } elseif ($restructPayment <= ($incomePerMonth - $monthlyExpenses)) {
+        } elseif ($restructPayment <= $availableMoney) {
             $result = [
                 'type' => 'warning',
                 'title' => 'Рекомендуется рассмотреть реструктуризацию задолженности',
@@ -59,8 +61,13 @@ class CalculatorController extends Controller
             'income' => round($incomePerMonth, 2),
             'expenses' => round($monthlyExpenses, 2),
             'currentPayment' => round($monthlyDebtPayment, 2),
-            'freeMoney' => round($freeMoneyForChart, 2),
+
+            // Теперь сюда передаётся реальный остаток, включая минус
+            'freeMoney' => round($freeMoney, 2),
+
+            // Оставил это поле, если оно где-то используется в blade/js
             'realFreeMoney' => round($freeMoney, 2),
+
             'restructPayment' => round($restructPayment, 2),
         ];
 
