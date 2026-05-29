@@ -116,15 +116,54 @@ class AdminController extends Controller
         return back()->with('success', 'Заявка удалена.');
     }
 
-    public function reviews()
+    public function reviews(Request $request)
     {
         $this->checkAdmin();
 
-        $reviews = Review::with(['user', 'approvedBy'])
-            ->latest()
-            ->get();
+        $validated = $request->validate([
+            'search' => ['nullable', 'string', 'max:255'],
+            'status' => ['nullable', 'in:pending,approved,rejected'],
+            'date_from' => ['nullable', 'date'],
+            'date_to' => ['nullable', 'date', 'after_or_equal:date_from'],
+        ]);
 
-        return view('admin.reviews', compact('reviews'));
+        $query = Review::with(['user', 'approvedBy'])
+            ->latest();
+
+        if (!empty($validated['search'])) {
+            $search = trim($validated['search']);
+
+            $query->where(function ($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%")
+                    ->orWhere('text', 'like', "%{$search}%")
+                    ->orWhereHas('user', function ($userQuery) use ($search) {
+                        $userQuery->where('full_name', 'like', "%{$search}%")
+                            ->orWhere('email', 'like', "%{$search}%");
+                    });
+            });
+        }
+
+        if (!empty($validated['status'])) {
+            $query->where('status', $validated['status']);
+        }
+
+        if (!empty($validated['date_from'])) {
+            $query->whereDate('created_at', '>=', $validated['date_from']);
+        }
+
+        if (!empty($validated['date_to'])) {
+            $query->whereDate('created_at', '<=', $validated['date_to']);
+        }
+
+        $reviews = $query->paginate(10)->withQueryString();
+
+        $statusLabels = [
+            'pending' => 'На модерации',
+            'approved' => 'Одобрен',
+            'rejected' => 'Отклонён',
+        ];
+
+        return view('admin.reviews', compact('reviews', 'statusLabels'));
     }
 
     public function updateReviewStatus(Request $request, Review $review)
@@ -143,13 +182,58 @@ class AdminController extends Controller
         return back()->with('success', 'Статус отзыва обновлён.');
     }
 
-    public function users()
+    public function deleteReview(Review $review)
     {
         $this->checkAdmin();
 
-        $users = User::latest()->get();
+        $review->delete();
 
-        return view('admin.users', compact('users'));
+        return back()->with('success', 'Отзыв удалён.');
+    }
+
+    public function users(Request $request)
+    {
+        $this->checkAdmin();
+
+        $validated = $request->validate([
+            'search' => ['nullable', 'string', 'max:255'],
+            'role' => ['nullable', 'in:user,admin'],
+            'date_from' => ['nullable', 'date'],
+            'date_to' => ['nullable', 'date', 'after_or_equal:date_from'],
+        ]);
+
+        $query = User::latest();
+
+        if (!empty($validated['search'])) {
+            $search = trim($validated['search']);
+
+            $query->where(function ($q) use ($search) {
+                $q->where('full_name', 'like', "%{$search}%")
+                    ->orWhere('email', 'like', "%{$search}%")
+                    ->orWhere('phone', 'like', "%{$search}%");
+            });
+        }
+
+        if (!empty($validated['role'])) {
+            $query->where('role', $validated['role']);
+        }
+
+        if (!empty($validated['date_from'])) {
+            $query->whereDate('created_at', '>=', $validated['date_from']);
+        }
+
+        if (!empty($validated['date_to'])) {
+            $query->whereDate('created_at', '<=', $validated['date_to']);
+        }
+
+        $users = $query->paginate(10)->withQueryString();
+
+        $roleLabels = [
+            'user' => 'Пользователь',
+            'admin' => 'Администратор',
+        ];
+
+        return view('admin.users', compact('users', 'roleLabels'));
     }
 
     public function updateUserRole(Request $request, User $user)
@@ -165,5 +249,18 @@ class AdminController extends Controller
         ]);
 
         return back()->with('success', 'Роль пользователя обновлена.');
+    }
+
+    public function deleteUser(User $user)
+    {
+        $this->checkAdmin();
+
+        if ($user->id === auth()->id()) {
+            return back()->with('error', 'Нельзя удалить собственный аккаунт.');
+        }
+
+        $user->delete();
+
+        return back()->with('success', 'Пользователь удалён.');
     }
 }

@@ -4,8 +4,8 @@
 <div class="services-page">
     <div class="services-container">
         <h1 class="services-title">Наши услуги</h1>
-        <p class="services-subtitle">
-            Мы оказываем юридическую помощь по вопросам списания долгов, банкротства и защиты интересов клиентов.
+        <p class="section-lead">
+            Мы оказываем юридическую помощь гражданам по вопросам банкротства, списания долгов, реструктуризации задолженности и защиты интересов клиента.
         </p>
 
         <div class="services-grid">

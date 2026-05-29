@@ -222,9 +222,16 @@ Route::prefix('admin')
         Route::post('/reviews/{review}/status', [AdminController::class, 'updateReviewStatus'])
             ->name('reviews.status');
 
+        Route::delete('/reviews/{review}', [AdminController::class, 'deleteReview'])
+            ->name('reviews.delete');
+
         Route::get('/users', [AdminController::class, 'users'])
             ->name('users');
 
         Route::post('/users/{user}/role', [AdminController::class, 'updateUserRole'])
             ->name('users.role');
+
+        Route::delete('/users/{user}', [AdminController::class, 'deleteUser'])
+            ->name('users.delete');
+
     });
