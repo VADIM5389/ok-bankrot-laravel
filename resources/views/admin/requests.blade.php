@@ -156,7 +156,7 @@
         </div>
 
         <div class="admin-pagination">
-            {{ $requests->links() }}
+            {{ $requests->onEachSide(1)->links('pagination::bootstrap-4') }}
         </div>
 
         <div class="admin-back">
