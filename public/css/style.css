@@ -1290,6 +1290,113 @@ iframe {
 .faq-answer p:last-child {
   margin-bottom: 0;
 }
+
+.faq-law-note {
+  max-width: 1000px;
+  margin: 0 auto 32px;
+  padding: 22px 24px;
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  background: linear-gradient(135deg, #fff9e8 0%, #fff3cf 100%);
+  border: 1px solid rgba(250, 187, 48, 0.55);
+  border-left: 6px solid #fabb30;
+  border-radius: 20px;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.07);
+}
+
+.faq-law-icon {
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fabb30;
+  border-radius: 16px;
+  font-size: 26px;
+  box-shadow: 0 6px 16px rgba(250, 187, 48, 0.3);
+}
+
+.faq-law-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.faq-law-content strong {
+  display: block;
+  margin-bottom: 8px;
+  color: #222;
+  font-size: 20px;
+  line-height: 1.35;
+}
+
+.faq-law-content p {
+  margin: 0 0 12px;
+  color: #444;
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+.faq-law-content a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #d72f15;
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(215, 47, 21, 0.35);
+  transition: 0.2s ease;
+}
+
+.faq-law-content a::after {
+  content: "→";
+  transition: transform 0.2s ease;
+}
+
+.faq-law-content a:hover {
+  color: #b82610;
+  border-bottom-color: #b82610;
+}
+
+.faq-law-content a:hover::after {
+  transform: translateX(4px);
+}
+
+@media (max-width: 768px) {
+  .faq-law-note {
+    padding: 18px;
+    gap: 14px;
+    border-radius: 16px;
+  }
+
+  .faq-law-icon {
+    width: 46px;
+    height: 46px;
+    font-size: 22px;
+    border-radius: 14px;
+  }
+
+  .faq-law-content strong {
+    font-size: 18px;
+  }
+
+  .faq-law-content p {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 520px) {
+  .faq-law-note {
+    flex-direction: column;
+  }
+
+  .faq-law-icon {
+    width: 44px;
+    height: 44px;
+  }
+}
 /* Конец FAQ */
 
 /* Почему выбирают нас */
@@ -2603,6 +2710,41 @@ iframe {
   margin: 0;
 }
 
+.footer-law {
+  max-width: 650px;
+  line-height: 1.5;
+  color: #333;
+  font-size: 14px;
+}
+
+.footer-law a {
+  display: inline-block;
+  margin-top: 4px;
+  color: #d72f15;
+  font-weight: 700;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(215, 47, 21, 0.4);
+  transition: 0.2s ease;
+}
+
+.footer-law a:hover {
+  color: #b82610;
+  border-bottom-color: #b82610;
+}
+
+.footer-bottom {
+  max-width: 1200px;
+  margin: 32px auto 0;
+  padding-top: 18px;
+  border-top: 1px solid rgba(34, 34, 34, 0.18);
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 35px;
+  align-items: start;
+  color: #333;
+  font-size: 14px;
+}
+
 /* Адаптив подвала */
 
 @media (max-width: 768px) {
@@ -2630,6 +2772,14 @@ iframe {
   .footer-bottom {
     flex-direction: column;
     text-align: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer-bottom {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    text-align: left;
   }
 }
 /* конец подвала */

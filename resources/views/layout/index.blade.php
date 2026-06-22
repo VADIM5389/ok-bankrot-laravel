@@ -226,7 +226,20 @@
     <div class="footer-bottom">
         <p>© {{ date('Y') }} ОК Банкрот. Все права защищены.</p>
 
-    </div>
+        <div class="footer-law">
+            <span>
+                Работаем в соответствии с Федеральным законом № 127-ФЗ
+                «О несостоятельности (банкротстве)».
+            </span>
+
+            <a
+                href="https://www.consultant.ru/document/cons_doc_LAW_39331/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Ознакомиться с законом
+            </a>
+        </div>
 </footer>
 
     <script>

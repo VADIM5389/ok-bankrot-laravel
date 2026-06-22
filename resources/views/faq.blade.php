@@ -4,6 +4,23 @@
     <div class="faq-container">
         <h1 class="faq-title">❓ Часто задаваемые вопросы</h1>
     
+            <div class="faq-law-note">
+                <div class="faq-law-icon">⚖️</div>
+
+                <div class="faq-law-content">
+                    <strong>Информация основана на Федеральном законе № 127-ФЗ</strong>
+
+                    <a
+                        href="https://www.consultant.ru/document/cons_doc_LAW_39331/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Ознакомиться с законом
+                    </a>
+                </div>
+            </div>
+
+
         <div class="faq-list">
             <div class="faq-item">
                 <div class="faq-question">
