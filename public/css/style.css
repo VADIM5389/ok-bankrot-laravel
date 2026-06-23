@@ -1364,6 +1364,21 @@ iframe {
   transform: translateX(4px);
 }
 
+.faq-answer ul {
+  margin: 10px 0 18px;
+  padding-left: 24px;
+}
+
+.faq-answer li {
+  margin-bottom: 8px;
+  color: #444;
+  line-height: 1.55;
+}
+
+.faq-answer li::marker {
+  color: #d72f15;
+}
+
 @media (max-width: 768px) {
   .faq-law-note {
     padding: 18px;
